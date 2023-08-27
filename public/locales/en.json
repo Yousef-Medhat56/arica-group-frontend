@@ -1,0 +1,273 @@
+{
+    "locale": "en",
+    "welcome": "Welcome to Arica Group",
+    "landingTitle":"Arica Group: We will help you achieve your dream house",
+    "lang": {
+        "lang": "Language",
+        "ar": "Arabic",
+        "en": "English"
+    },
+    "header": {
+        "services": "Services",
+        "offers": "Offers",
+        "about": "About",
+        "search": "Search"
+    },
+    "services": {
+        "designGardens": {
+            "name": "Gardens Design",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        },
+        "maintenanceWork": {
+            "name": "Maintenance Work",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        },
+        "swimmingPools": {
+            "name": "Swimming Pools",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        },
+        "foundations": {
+            "name": "Fountains and Waterfalls",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        },
+        "irrigationNetworks": {
+            "name": "Irrigation Networks",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        },
+        "electricyNetwork": {
+            "name": "Electricy Networks",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        },
+        "gardenAcc": {
+            "name": "Garden Accessories",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        },
+        "studentTraining": {
+            "name": "Students Training",
+            "shortDesc": "service description",
+            "longDesc": "pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo"
+        }
+    },
+    "requests": {
+        "visit": "visit request"
+    },
+    "hero": {
+        "gradientHeading": "Live Naturally,",
+        "normalHeading": "design your garden at the simplest costs and quickest time",
+        "description": "Arica Group will help you achieve your dream house",
+        "button": "Send a visit request",
+        "free": "apply now for free"
+    },
+    "featuredClients": {
+        "heading": "Featured Clients ",
+        "description": "Meet our featured clients who trust us"
+    },
+    "servicesSection": {
+        "heading": "Our Services",
+        "description": "Take a look at the different services we provide"
+    },
+    "gallerySection": {
+        "heading": "Gallery",
+        "description": "See some of our previous work"
+    },
+    "reviewSection": {
+        "heading": "Reviews",
+        "description": "See what our customers say about us"
+    },
+    "offersSection": {
+        "title": "Offers - Arica group",
+        "heading": "Offers",
+        "description": "Take advantage of our special offers available for a limited time",
+        "discount": "Discount",
+        "order": "Order",
+        "available": "Available till",
+        "viewMore": "View more offers",
+        "pound": "L.E",
+        "insteadOf": "only, instead of"
+    },
+    "filter": {
+        "way": "Filter with: ",
+        "type": "Type",
+        "all": "All",
+        "discount": "Discount",
+        "highDiscount": "Higher discount",
+        "lowDiscount": "Lower Discount"
+    },
+    "accessories": {
+        "title": "Accessories - Arica group",
+        "heading": "Garden Accessories"
+    },
+    "successModal": {
+        "submitted": "Submitted successfully",
+        "contact": "We will contact you soon"
+    },
+    "visitRequest": {
+        "title": "Visit Request - Arica group",
+        "heading": "Visit Request",
+        "description": "Send a visit request and we will contact you as soon as possible",
+        "name": "Name",
+        "email": "Email",
+        "address": "Address",
+        "phone": "Phone Number",
+        "service": "What's the purpose of the visit?",
+        "visit_date": "Visit date",
+        "visit_time": "Visit time",
+        "call_date": "Call date",
+        "call_time": "Call time",
+        "submit": "Submit",
+        "errors": {
+            "name": {
+                "required": "Name is required"
+            },
+            "email": {
+                "required": "Email is required"
+            },
+            "address": {
+                "required": "Address is required"
+            },
+            "phone": {
+                "required": "Phone number is required",
+                "invalid": "Enter a valid phone number"
+            },
+            "service": {
+                "required": "Service is required"
+            }
+        }
+    },
+    "maintenanceRequest": {
+        "title": "Maintenance Request - Arica group",
+        "heading": "Maintenance Request",
+        "description": "Send a maintenance request and we will contact you as soon as possible",
+        "name": "Name",
+        "email": "Email",
+        "address": "Address",
+        "phone": "Phone Number",
+        "service": "The problem type",
+        "visit_date": "Visit date",
+        "visit_time": "Visit time",
+        "call_date": "Call date",
+        "call_time": "Call time",
+        "details":"Tell us more details about the problem",
+        "detailsPlaceholder":"The problem details...",
+        "submit": "Submit",
+        "errors": {
+            "name": {
+                "required": "Name is required"
+            },
+            "email": {
+                "required": "Email is required"
+            },
+            "address": {
+                "required": "Address is required"
+            },
+            "phone": {
+                "required": "Phone number is required",
+                "invalid": "Enter a valid phone number"
+            },
+            "service": {
+                "required": "Problem type is required"
+            }
+        }
+    },
+    "trainingRequest": {
+        "title": "Student training Request - Arica group",
+        "heading": "Training Request",
+        "description": "Send a training request and we will contact you as soon as possible",
+        "name": "Name",
+        "email": "Email",
+        "address": "Address",
+        "phone": "Phone Number",
+        "college": "College",
+        "experience":"Tell us about your experience",
+        "submit": "Submit",
+        "errors": {
+            "name": {
+                "required": "Name is required"
+            },
+            "email": {
+                "required": "Email is required"
+            },
+            "address": {
+                "required": "Address is required"
+            },
+            "phone": {
+                "required": "Phone number is required",
+                "invalid": "Enter a valid phone number"
+            },
+            
+            "college": {
+                "required": "College is required"
+            },
+            "experience": {
+                "required": "Talk about your experience"
+            }
+        }
+    },
+    "offerRequest": {
+        "title": "Offer Request - Arica group",
+        "heading": "Offer Request",
+        "description": "Send an offer request and we will contact you as soon as possible",
+        "name": "Name",
+        "email": "Email",
+        "address": "Address",
+        "phone": "Phone Number",
+        "submit": "Submit",
+        "errors": {
+            "name": {
+                "required": "Name is required"
+            },
+            "email": {
+                "required": "Email is required"
+            },
+            "address": {
+                "required": "Address is required"
+            },
+            "phone": {
+                "required": "Phone number is required",
+                "invalid": "Enter a valid phone number"
+            }
+        }
+    },
+    "swimmingPools": {
+        "title": "Swimming Pools - Arica group",
+        "heading": "Swimming Pools",
+        "description": "Lorem ipsum dolor sit amet consectetur volor",
+        "know": "Swimming pools types that we construct:",
+        "why": "Why should you choose us to construct your pool?"
+    },
+    "gardens": {
+        "title": "Gardens - Arica group",
+        "heading": "Gardens",
+        "description": "Lorem ipsum dolor sit amet consectetur volor",
+        "know": "Gardens types that we design:",
+        "why": "Why should you choose us to design your garden?"
+    },
+    "fountains": {
+        "title": "Fountains and Waterfalls - Arica group",
+        "heading": "Fountains and Waterfalls",
+        "description": "Lorem ipsum dolor sit amet consectetur volor",
+        "know": "Fountains and Waterfalls types that we construct:",
+        "why": "Why should you choose us to construct your fountain?"
+    },
+    "irrigationNetworks": {
+        "title": "Irrigation Networks - Arica group",
+        "heading": "Irrigation Networks",
+        "description": "Lorem ipsum dolor sit amet consectetur volor",
+        "know": "Irrigation Networks types that we construct:",
+        "why": "Why should you choose us to construct your irrigation network?"
+    },
+    "electricityNetworks": {
+        "title": "Electricity Networks - Arica group",
+        "heading": "Electricity Networks",
+        "description": "Lorem ipsum dolor sit amet consectetur volor",
+        "know": "Electricity Networks types that we construct:",
+        "why": "Why should you choose us to construct your electricity network?"
+    }
+}

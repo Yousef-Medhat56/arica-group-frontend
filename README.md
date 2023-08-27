@@ -1,0 +1,1 @@
+# Arica Group - Frontend
