@@ -34,9 +34,9 @@ const SwimmingPoolsPage: NextPage = (props) => {
                     description={content.swimmingPools.description}
                 >
                     <>
-                        <Heading as={"h2"} fontSize="xl">
+                        {/* <Heading as={"h2"} fontSize="xl">
                             {content.swimmingPools.know}
-                        </Heading>
+                        </Heading> */}
 
                         {services.map((service, index) => {
                             return (
@@ -50,7 +50,7 @@ const SwimmingPoolsPage: NextPage = (props) => {
                             );
                         })}
 
-                        <Heading as={"h2"} fontSize="xl" marginTop={20}>
+                        <Heading as={"h2"} fontSize={{base:"lg",lg:"xl"}}  marginTop={20}>
                             {content.swimmingPools.why}
                         </Heading>
                         <Grid

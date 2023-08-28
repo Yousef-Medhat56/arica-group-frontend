@@ -34,9 +34,9 @@ const IrrigationNetworksPage: NextPage = (props) => {
                     description={content.irrigationNetworks.description}
                 >
                     <>
-                        <Heading as={"h2"} fontSize="xl">
+                        {/* <Heading as={"h2"} fontSize="xl">
                             {content.irrigationNetworks.know}
-                        </Heading>
+                        </Heading> */}
 
                         {services.map((service, index) => {
                             return (
@@ -50,7 +50,7 @@ const IrrigationNetworksPage: NextPage = (props) => {
                             );
                         })}
 
-                        <Heading as={"h2"} fontSize="xl" marginTop={20}>
+                        <Heading as={"h2"} fontSize={{base:"lg",lg:"xl"}}  marginTop={20}>
                             {content.irrigationNetworks.why}
                         </Heading>
                         <Grid

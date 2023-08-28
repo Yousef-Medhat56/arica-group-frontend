@@ -19,7 +19,7 @@ export default function SectionHeader({
                     borderBottomRightRadius={{ base: "30px", md: "35px" }}
                 ></Box>
                 <Heading
-                    fontSize={{ base: "xl", md: "3xl" }}
+                    fontSize={{ base: "xl", lg: "2xl" }}
                     color="text.primary"
                     textAlign={"center"}
                 >
@@ -36,7 +36,7 @@ export default function SectionHeader({
             <Text
                 textAlign={"center"}
                 color={"text.secondary"}
-                fontSize={{ base: "md", md: "18px", xl: "22px" }}
+                fontSize={{ base: "md", md: "18px", xl: "xl" }}
             >
                 {description}
             </Text>

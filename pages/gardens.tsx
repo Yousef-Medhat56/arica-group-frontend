@@ -34,9 +34,9 @@ const GardensPage: NextPage = (props) => {
                     description={content.gardens.description}
                 >
                     <>
-                        <Heading as={"h2"} fontSize="xl">
+                        {/* <Heading as={"h2"} fontSize="xl">
                             {content.gardens.know}
-                        </Heading>
+                        </Heading> */}
 
                         {services.map((service, index) => {
                             return (
@@ -50,7 +50,11 @@ const GardensPage: NextPage = (props) => {
                             );
                         })}
 
-                        <Heading as={"h2"} fontSize="xl" marginTop={20}>
+                        <Heading
+                            as={"h2"}
+                            fontSize={{ base: "lg", lg: "xl" }}
+                            marginTop={20}
+                        >
                             {content.gardens.why}
                         </Heading>
                         <Grid
@@ -87,7 +91,7 @@ const GardensPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} />
         </div>
     );
 };
@@ -100,12 +104,13 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/gardens-page?populate[service][populate]=*&populate[why_us][populate]=*`,
         ctx.locale
     );
-   
+
     return {
         props: {
             content,
             services: pageData.data.attributes.service,
             features: pageData.data.attributes.why_us,
-        },revalidate: 10
+        },
+        revalidate: 10,
     };
 };

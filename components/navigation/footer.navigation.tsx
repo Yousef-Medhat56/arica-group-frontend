@@ -63,7 +63,7 @@ export default function Footer({ content }: { content: any }) {
     const router = useRouter();
 
     return (
-        <Box bg={"#fafffb"} color={"text.primary"} mt={8}>
+        <Box bg={"#fafffb"} color={"text.primary"} mt={8} borderTop={"2px solid #eee"}>
             <MainContainer py={10}>
                 <SimpleGrid
                     templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 1fr" }}

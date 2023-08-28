@@ -14,11 +14,11 @@ export default function GalleryCard({ imgUrl, description }: GalleryCardProps) {
             <Image
                 src={`${BACKEND_DOMAIN}${imgUrl}`}
                 alt={description}
-                height="466px"
-                width={"700px"}
+                height={[210, 300, 466]}
+                width={[320, 500, 700]}
                 objectFit={"contain"}
                 borderRadius={"lg"}
-                shadow={"xl"}
+                shadow={"sm"}
             />
             {description && (
                 <Text

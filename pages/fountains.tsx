@@ -34,9 +34,9 @@ const FountainsPage: NextPage = (props) => {
                     description={content.fountains.description}
                 >
                     <>
-                        <Heading as={"h2"} fontSize="2xl">
+                        {/* <Heading as={"h2"} fontSize="2xl">
                             {content.fountains.know}
-                        </Heading>
+                        </Heading> */}
 
                         {services.map((service, index) => {
                             return (
@@ -50,7 +50,7 @@ const FountainsPage: NextPage = (props) => {
                             );
                         })}
 
-                        <Heading as={"h2"} fontSize="2xl" marginTop={20}>
+                        <Heading as={"h2"} fontSize={{base:"lg",lg:"xl"}}  marginTop={20}>
                             {content.fountains.why}
                         </Heading>
                         <Grid
