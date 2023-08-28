@@ -106,6 +106,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             content,
             services: pageData.data.attributes.service,
             features: pageData.data.attributes.why_us,
-        },
+        },revalidate: 10
     };
 };

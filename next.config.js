@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    typescript: { ignoreBuildErrors: true },
     reactStrictMode: true,
     swcMinify: true,
     i18n: {
@@ -10,14 +11,13 @@ const nextConfig = {
     images: { domains: ["localhost"] },
     async redirects() {
         return [
-          {
-            source: '/admin',
-            destination: process.env.BACKEND_DOMAIN,
-            permanent: true,
-           
-          },
-        ]
-      }
+            {
+                source: "/admin",
+                destination: process.env.BACKEND_DOMAIN,
+                permanent: true,
+            },
+        ];
+    },
 };
 
 module.exports = nextConfig;

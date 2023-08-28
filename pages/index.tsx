@@ -54,7 +54,7 @@ const Home: NextPage = (props) => {
             {/* scroll to up button  */}
             <ScrollUpButton />
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} />
         </div>
     );
 };
@@ -101,6 +101,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             reviews: reviews.data,
             offers: offers.data,
         },
+        revalidate: 10,
     };
 };
 export default Home;

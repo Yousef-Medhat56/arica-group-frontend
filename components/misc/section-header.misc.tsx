@@ -21,6 +21,7 @@ export default function SectionHeader({
                 <Heading
                     fontSize={{ base: "xl", md: "3xl" }}
                     color="text.primary"
+                    textAlign={"center"}
                 >
                     {heading}
                 </Heading>
