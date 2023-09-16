@@ -1,7 +1,7 @@
 {
     "locale": "en",
     "welcome": "Welcome to Arica Group",
-    "landingTitle":"Arica Group: We will help you achieve your dream house",
+    "landingTitle": "Arica Group: We will help you achieve your dream house",
     "lang": {
         "lang": "Language",
         "ar": "Arabic",
@@ -154,8 +154,8 @@
         "visit_time": "Visit time",
         "call_date": "Call date",
         "call_time": "Call time",
-        "details":"Tell us more details about the problem",
-        "detailsPlaceholder":"The problem details...",
+        "details": "Tell us more details about the problem",
+        "detailsPlaceholder": "The problem details...",
         "submit": "Submit",
         "errors": {
             "name": {
@@ -185,7 +185,7 @@
         "address": "Address",
         "phone": "Phone Number",
         "college": "College",
-        "experience":"Tell us about your experience",
+        "experience": "Tell us about your experience",
         "submit": "Submit",
         "errors": {
             "name": {
@@ -201,7 +201,6 @@
                 "required": "Phone number is required",
                 "invalid": "Enter a valid phone number"
             },
-            
             "college": {
                 "required": "College is required"
             },
@@ -269,5 +268,21 @@
         "description": "Lorem ipsum dolor sit amet consectetur volor",
         "know": "Electricity Networks types that we construct:",
         "why": "Why should you choose us to construct your electricity network?"
+    },
+    "search": {
+        "title": "Search - Arica group",
+        "heading": "Search",
+        "description": "What are you looking for?"
+    },
+    "contact": {
+        "title": "Contact us - Arica group",
+        "heading": "Contact Us",
+        "description": "We will be happy to hear from you",
+        "choose": "Choose the "
+    },
+    "notfound": {
+        "title": "Page doesn't exist - Arica Group",
+        "notfound": "Page doesn't exist",
+        "home": "Go back home"
     }
 }
