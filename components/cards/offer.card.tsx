@@ -22,7 +22,7 @@ const BACKEND_DOMAIN = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
 
 export interface OfferCardProps {
     content: any;
-    id:number;
+    id: number;
     imgSrc: string;
     title: string;
     description: string;
@@ -96,26 +96,29 @@ export default function OfferCard({
                         </Box>
 
                         <Stack spacing={3} pos="relative">
-                            <Tag
-                                pos={"absolute"}
-                                top={{ base: "-38px", lg: "-38px" }}
-                                left={!isEnglish ? "0" : ""}
-                                right={isEnglish ? "0" : ""}
-                                size="md"
-                                px="20px"
-                                py="8px"
-                                borderRadius={"lg"}
-                                color={"#598321"}
-                                bg={"#DFF0DF"}
-                                variant="solid"
-                                width={"fit-content"}
-                                border={"1px solid #598321"}
-                            >
-                                <TagLeftIcon as={ClockOutlinedIcon} />
-                                <TagLabel>
-                                    {content.offersSection.available} {endDate}
-                                </TagLabel>
-                            </Tag>
+                            {discount != 0 && (
+                                <Tag
+                                    pos={"absolute"}
+                                    top={{ base: "-38px", lg: "-38px" }}
+                                    left={!isEnglish ? "0" : ""}
+                                    right={isEnglish ? "0" : ""}
+                                    size="md"
+                                    px="20px"
+                                    py="8px"
+                                    borderRadius={"lg"}
+                                    color={"#598321"}
+                                    bg={"#DFF0DF"}
+                                    variant="solid"
+                                    width={"fit-content"}
+                                    border={"1px solid #598321"}
+                                >
+                                    <TagLeftIcon as={ClockOutlinedIcon} />
+                                    <TagLabel>
+                                        {content.offersSection.available}{" "}
+                                        {endDate}
+                                    </TagLabel>
+                                </Tag>
+                            )}
                             <Tag
                                 size="sm"
                                 px="12px"
@@ -149,7 +152,7 @@ export default function OfferCard({
                         <Stack spacing={3} mt={4}>
                             <Divider bg="#a9a9a9" h={"1px"} />
                             <HStack justifyContent={"space-between"}>
-                                {accessoryType && priceBefore ? (
+                                {priceBefore ? (
                                     <Text
                                         color={"text.secondary"}
                                         fontSize="sm"
@@ -167,11 +170,18 @@ export default function OfferCard({
                                             )}{" "}
                                             {content.offersSection.pound}
                                         </Text>{" "}
-                                        {content.offersSection.insteadOf}
-                                        {"  "}
-                                        <Text as="s" color={"red.500"}>
-                                            {priceBefore}
-                                        </Text>
+                                        {discount > 0 && (
+                                            <>
+                                                {
+                                                    content.offersSection
+                                                        .insteadOf
+                                                }
+                                                {"  "}
+                                                <Text as="s" color={"red.500"}>
+                                                    {priceBefore}
+                                                </Text>
+                                            </>
+                                        )}
                                     </Text>
                                 ) : (
                                     <Text

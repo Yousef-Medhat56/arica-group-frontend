@@ -33,7 +33,6 @@ import Logo from "../../public/images/logo.png";
 
 //Nav items
 import NAV_ITEMS, { NavItem } from "./nav-items.navigation";
-
 //@ts-ignore
 export default function Header({ content }) {
     const { isOpen, onToggle } = useDisclosure();
@@ -63,6 +62,7 @@ export default function Header({ content }) {
                                 </Flex>
                             </Link>
                         </NextLink>
+                  
                         <Flex
                             flex={{ base: 1, lg: "auto" }}
                             justify={"flex-end"}
