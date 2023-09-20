@@ -76,6 +76,16 @@ const NAV_ITEMS = (content: any): Array<NavItem> => {
             label: content.header.offers,
             href: "/offers",
         },
+        {
+            label: content.header.about,
+            href: "/about-us",
+            children: [
+                { label: content.about.overview,href:"/about-us#overview" },
+                { label: content.about.history ,href:"/about-us#history" },
+                { label: content.about.vision,href:"/about-us#vision"  },
+                { label: content.about.team,href:"/about-us#team"  },
+            ],
+        },
         // {
         //     label: content.header.about,
         //     href: "/about",

@@ -21,6 +21,7 @@ import { get, post } from "../adapters";
 import SuccesSubmitModal from "../components/modals/success-submit.modal";
 import { useRouter } from "next/router";
 import Footer from "../components/navigation/footer.navigation";
+import FlowersPattern from "../components/misc/flowers-pattern.misc";
 
 const OfferRequestPage: NextPage = (props) => {
     //@ts-ignore
@@ -94,10 +95,10 @@ const OfferRequestPage: NextPage = (props) => {
             <SectionContainer
                 heading={content.offerRequest.heading}
                 description={content.offerRequest.description}
-                bgColor={"#fafffb"}
+                
             >
                 <Stack mx={"auto"} maxW={"xl"} px={{ base: 0, md: 6 }}>
-                    <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
+                    <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8} zIndex={1}>
                         <Stack spacing={4}>
                             <FormControl
                                 id="name"
@@ -182,6 +183,7 @@ const OfferRequestPage: NextPage = (props) => {
                         </Stack>
                     </Box>
                 </Stack>
+                <FlowersPattern/>
             </SectionContainer>
             <SuccesSubmitModal
                 isOpen={isOpen}

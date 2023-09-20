@@ -19,10 +19,26 @@ import BestOffersSection from "../components/sections/landing-page/offers.sectio
 import ScrollUpButton from "../components/buttons/scroll-up.button";
 import qs from "qs";
 import Footer from "../components/navigation/footer.navigation";
+import StatsSection from "../components/sections/landing-page/stats.section";
+import ProjectsSection from "../components/sections/landing-page/projects.section";
 
 const Home: NextPage = (props) => {
-    //@ts-ignore
-    const { content, featuredClients, galleryImages, reviews, offers } = props;
+    const {
+        //@ts-ignore
+        content,
+        //@ts-ignore
+        featuredClients,
+        //@ts-ignore
+        galleryImages,
+        //@ts-ignore
+        projects,
+        //@ts-ignore
+        reviews,
+        //@ts-ignore
+        offers,
+        //@ts-ignore
+        stats,
+    } = props;
     return (
         <div>
             <Head>
@@ -36,19 +52,26 @@ const Home: NextPage = (props) => {
                 <Hero content={content} />
             </MainContainer>
             {/* Featured clients  */}
-            {featuredClients.length > 4 && (
+            {featuredClients.length > 3 && (
                 <Clients
                     sectionHead={content.featuredClients.heading}
                     sectionDesc={content.featuredClients.description}
                     companies={featuredClients}
                 />
             )}
+            {/* STATS section  */}
+            <StatsSection content={content} stats={stats} />
             {/* Our services section  */}
             <ServicesSection content={content} />
             {/* Gallery section  */}
             <GallerySection content={content} images={galleryImages} />
+
             {/* Offers Section */}
             <BestOffersSection content={content} offers={offers} />
+            {/* Projects section  */}
+            {projects.length > 2 && (
+                <ProjectsSection content={content} projects={projects} />
+            )}
             {/* Reviews Section */}
             <ReviewSection content={content} reviews={reviews} />
             {/* scroll to up button  */}
@@ -67,8 +90,11 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     );
 
     const galleryImages = await get("/galleries?populate=*", ctx.locale);
+    const projects = await get("/projects?populate[thumbnail]=*", ctx.locale);
 
     const reviews = await get("/reviews", ctx.locale);
+
+    const stats = await get("/statistic?populate=*", ctx.locale);
 
     const offersQuery = qs.stringify({
         populate: "*",
@@ -98,7 +124,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             content,
             featuredClients: featuredClients.data,
             galleryImages: galleryImages.data,
+            projects: projects.data,
             reviews: reviews.data,
+            stats: stats.data.attributes,
             offers: offers.data,
         },
         revalidate: 10,

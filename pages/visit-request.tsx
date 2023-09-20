@@ -8,6 +8,8 @@ import {
     FormErrorMessage,
     useDisclosure,
     Select,
+    Image,
+    Center,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Header from "../components/navigation/header.navigation";
@@ -23,6 +25,7 @@ import SuccesSubmitModal from "../components/modals/success-submit.modal";
 import DatePickerComp from "../components/pickers/date.picker";
 import TimePickerComp from "../components/pickers/time.picker";
 import { formatTime } from "../utils/date.util";
+import FlowersPattern from "../components/misc/flowers-pattern.misc";
 import Footer from "../components/navigation/footer.navigation";
 
 const VisitRequestPage: NextPage = (props) => {
@@ -118,10 +121,15 @@ const VisitRequestPage: NextPage = (props) => {
             <SectionContainer
                 heading={content.visitRequest.heading}
                 description={content.visitRequest.description}
-                bgColor={"#fafffb"}
             >
                 <Stack mx={"auto"} maxW={"xl"} px={{ base: 0, md: 6 }}>
-                    <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
+                    <Box
+                        rounded={"lg"}
+                        bg={"white"}
+                        boxShadow={"lg"}
+                        p={8}
+                        zIndex={1}
+                    >
                         <Stack spacing={4}>
                             <FormControl
                                 id="name"
@@ -298,6 +306,7 @@ const VisitRequestPage: NextPage = (props) => {
                         </Stack>
                     </Box>
                 </Stack>
+                <FlowersPattern/>
             </SectionContainer>
             <SuccesSubmitModal
                 isOpen={isOpen}
@@ -305,7 +314,7 @@ const VisitRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} />
         </div>
     );
 };

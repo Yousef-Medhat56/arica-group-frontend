@@ -16,7 +16,7 @@ class MyDocument extends Document {
         const { locale } = this.props.__NEXT_DATA__;
         const dir = locale === "ar" ? "rtl" : "ltr";
         return (
-            <Html>
+            <Html style={{ scrollBehavior: "smooth" }}>
                 <Head>
                     {/* Fonts */}
                     <link

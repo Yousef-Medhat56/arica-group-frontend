@@ -12,6 +12,7 @@ import {
     PopoverContent,
     useDisclosure,
     HStack,
+    chakra,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
@@ -20,6 +21,7 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
     ChevronLeftIcon,
+    Search2Icon,
 } from "@chakra-ui/icons";
 import Headroom from "react-headroom";
 
@@ -33,18 +35,22 @@ import Logo from "../../public/images/logo.png";
 
 //Nav items
 import NAV_ITEMS, { NavItem } from "./nav-items.navigation";
+import { useRouter } from "next/router";
 //@ts-ignore
 export default function Header({ content }) {
     const { isOpen, onToggle } = useDisclosure();
+    const router = useRouter();
+    const isEnglish = router.locale == "en";
     return (
-        <Headroom style={{ maxHeight: "70px" }}>
-            <Box as="header" w="full" zIndex={"100"} bg="#fff">
+        <Headroom style={{ maxHeight: "80px", zIndex: "1000" }}>
+            <Box as="header" w="full" zIndex={"1000"} bg="#fff">
                 <MainContainer>
-                    <Flex
+                    <HStack
                         bg={"white"}
                         minH={"70px"}
-                        py={{ base: 2 }}
+                        py={{ base: 3 }}
                         align="center"
+                        justify={"space-between"}
                     >
                         <NextLink href="/" passHref>
                             <Link>
@@ -62,7 +68,7 @@ export default function Header({ content }) {
                                 </Flex>
                             </Link>
                         </NextLink>
-                  
+
                         <Flex
                             flex={{ base: 1, lg: "auto" }}
                             justify={"flex-end"}
@@ -93,7 +99,7 @@ export default function Header({ content }) {
 
                         <Stack
                             display={{ base: "none", lg: "flex" }}
-                            flex={{ base: "auto" }}
+                            // flex={{ base: "auto" }}
                             justify={"flex-end"}
                             align={"center"}
                             direction={"row"}
@@ -107,7 +113,32 @@ export default function Header({ content }) {
                                 href={"/visit-request"}
                             />
                         </Stack>
-                    </Flex>
+                        <HStack display={{ base: "none", lg: "flex" }}>
+                            <chakra.button
+                                cursor={"pointer"}
+                                as={"a"}
+                                href="/search"
+                                aria-label="Search"
+                                paddingEnd={1}
+                            >
+                                <Search2Icon />
+                            </chakra.button>
+
+                            <a
+                                href={
+                                    isEnglish
+                                        ? process.env
+                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
+                                          "/ar"
+                                        : process.env
+                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
+                                          "/en"
+                                }
+                            >
+                                {isEnglish ? "العربية" : "English"}
+                            </a>
+                        </HStack>
+                    </HStack>
 
                     <Collapse in={isOpen} animateOpacity>
                         <MobileNav content={content} />
@@ -132,9 +163,7 @@ const DesktopNav = ({ content }) => {
                 <Box key={navItem.label}>
                     <Popover
                         trigger={"hover"}
-                        placement={
-                            locale == "ar" ? "bottom" : "bottom"
-                        }
+                        placement={locale == "ar" ? "bottom" : "bottom"}
                     >
                         {!navItem.children ? (
                             <NextLink href={navItem.href as string} passHref>
@@ -230,18 +259,20 @@ const DesktopSubNav = ({
                 _hover={{ bg: "#EBFFEB" }}
             >
                 <Stack direction={"row"} align={"center"}>
-                    <Box
-                        marginEnd={4}
-                        padding={"4px 8px"}
-                        bg="brand.bg.gray"
-                        borderRadius={"lg"}
-                    >
-                        <ImageComp
-                            src={`/icons/${iconName}`}
-                            width={"36px"}
-                            height="36px"
-                        />
-                    </Box>
+                    {iconName && (
+                        <Box
+                            marginEnd={4}
+                            padding={"4px 8px"}
+                            bg="brand.bg.gray"
+                            borderRadius={"lg"}
+                        >
+                            <ImageComp
+                                src={`/icons/${iconName}`}
+                                width={"36px"}
+                                height="36px"
+                            />
+                        </Box>
+                    )}
 
                     <Box>
                         <Text
@@ -253,9 +284,11 @@ const DesktopSubNav = ({
                         >
                             {label}
                         </Text>
-                        <Text fontSize={"sm"} color={"text.secondary"}>
-                            {subLabel}
-                        </Text>
+                        {/* {subLabel && (
+                            <Text fontSize={"sm"} color={"text.secondary"}>
+                                {subLabel}
+                            </Text>
+                        )} */}
                     </Box>
                     <Flex
                         transition={"all .3s ease"}
@@ -293,18 +326,54 @@ const DesktopSubNav = ({
 //Mobile Nav
 //@ts-ignore
 const MobileNav = ({ content }) => {
+    const router = useRouter();
+    const isEnglish = router.locale == "en";
     return (
         <Stack
             bg={"white"}
             p={4}
             display={{ lg: "none" }}
-            zIndex="100"
+            zIndex="1000"
             position={"relative"}
             top="0"
         >
             {NAV_ITEMS(content).map((navItem) => (
                 <MobileNavItem key={navItem.label} {...navItem} />
             ))}
+            <NextLink href={"/search"} passHref>
+                <Flex
+                    py={2}
+                    justify={"space-between"}
+                    align={"center"}
+                    _hover={{
+                        textDecoration: "none",
+                    }}
+                >
+                    <Text fontWeight={600} color={"text.primary"}>
+                        {content.header.search}
+                    </Text>
+                </Flex>
+            </NextLink>
+            <a href={ isEnglish
+                                        ? process.env
+                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
+                                          "/ar"
+                                        : process.env
+                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
+                                          "/en"}>
+                <Flex
+                    py={2}
+                    justify={"space-between"}
+                    align={"center"}
+                    _hover={{
+                        textDecoration: "none",
+                    }}
+                >
+                    <Text fontWeight={600} color={"text.primary"}>
+                        {isEnglish ? "العربية" : "English"}
+                    </Text>
+                </Flex>
+            </a>
         </Stack>
     );
 };

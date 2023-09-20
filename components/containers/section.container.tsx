@@ -8,15 +8,17 @@ export default function SectionContainer({
     description,
     bgColor,
     children,
+    py,
 }: {
     heading: string;
-    description: string;
+    description?: string;
     bgColor?: string;
     children: ReactNode;
+    py?: any;
 }) {
     return (
         <MainContainer bg={bgColor || "white"}>
-            <Box py={16}>
+            <Box py={py ? py : 16}>
                 <SectionHeader heading={heading} description={description} />
                 {children}
             </Box>

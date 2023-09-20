@@ -229,7 +229,7 @@ export default function Footer({ content }: { content: any }) {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const socialMedia = await get(`/social-media`);
-    console.log("socialMedia");
+    
     return {
         props: {
             socialMedia,

@@ -13,6 +13,12 @@
         "about": "About",
         "search": "Search"
     },
+    "about":{
+        "overview":"Overview",
+        "history":"History",
+        "vision":"Vision and Mission",
+        "team":"The Company Board of Directors"
+    },
     "services": {
         "designGardens": {
             "name": "Gardens Design",
@@ -69,9 +75,16 @@
         "heading": "Featured Clients ",
         "description": "Meet our featured clients who trust us"
     },
+    "statsSection":{
+        "heading": "Facts",
+        "description": "Arica Group in numbers" 
+    },
     "servicesSection": {
         "heading": "Our Services",
         "description": "Take a look at the different services we provide"
+    },"projectsSection":{
+        "heading":"Our Projects",
+        "description":"Some of the projects that we worked on"
     },
     "gallerySection": {
         "heading": "Gallery",
@@ -213,6 +226,7 @@
         "title": "Offer Request - Arica group",
         "heading": "Offer Request",
         "description": "Send an offer request and we will contact you as soon as possible",
+        "button":"Send an offer request",
         "name": "Name",
         "email": "Email",
         "address": "Address",

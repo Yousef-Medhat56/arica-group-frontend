@@ -4,7 +4,7 @@ import { ArrowUpIcon } from "@chakra-ui/icons";
 import MainContainer from "../containers/main.container";
 import { useRouter } from "next/router";
 export default function ScrollUpButton() {
-    const router = useRouter()
+    const router = useRouter();
     const [visible, setVisible] = useState(false);
 
     const toggleVisible = () => {
@@ -31,15 +31,14 @@ export default function ScrollUpButton() {
     return (
         <MainContainer>
             <IconButton
-            zIndex={100}
+                zIndex={100}
                 variant="solid"
                 aria-label="scroll to top button"
                 colorScheme={"whatsapp"}
                 fontSize="20px"
                 pos={"fixed"}
                 bottom={"40px"}
-                left={router.locale=="ar"?"30px":undefined}
-                right={router.locale=="en"?"30px":undefined}
+                right={"40px"}
                 display={visible ? "inline" : "none"}
                 icon={<ArrowUpIcon />}
                 bgGradient="linear(to-l, brand.linear.from, brand.linear.to)"

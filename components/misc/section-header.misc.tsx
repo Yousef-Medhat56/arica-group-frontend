@@ -6,10 +6,10 @@ export default function SectionHeader({
     description,
 }: {
     heading: string;
-    description: string;
+    description?: string;
 }) {
     return (
-        <VStack spacing={{ base: 3, md: 4 }} marginBottom={14}>
+        <VStack spacing={{ base: 3, md: 4 }} marginBottom={{base:8,md:14}} position={"relative"} zIndex={1}>
             <HStack spacing={3} dir="rtl">
                 <Box
                     w={{ base: "40px", md: "48px" }}
@@ -33,13 +33,13 @@ export default function SectionHeader({
                     bgGradient="linear(to-l, brand.linear.from, brand.linear.to)"
                 ></Box>
             </HStack>
-            <Text
+            {description&&<Text
                 textAlign={"center"}
                 color={"text.secondary"}
                 fontSize={{ base: "md", md: "18px", xl: "xl" }}
             >
                 {description}
-            </Text>
+            </Text>}
         </VStack>
     );
 }

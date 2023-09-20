@@ -18,7 +18,7 @@ const GardensPage: NextPage = (props) => {
         services,
         features,
     }: { content: any; services: any[]; features: any[] } = props;
-    console.log(features[0]);
+   
     return (
         <div>
             <Head>

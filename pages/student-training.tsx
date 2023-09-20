@@ -21,7 +21,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { post } from "../adapters";
 import SuccesSubmitModal from "../components/modals/success-submit.modal";
 import Footer from "../components/navigation/footer.navigation";
-
+import FlowersPattern from "../components/misc/flowers-pattern.misc";
 
 const TrainingRequestPage: NextPage = (props) => {
     //@ts-ignore
@@ -103,10 +103,15 @@ const TrainingRequestPage: NextPage = (props) => {
             <SectionContainer
                 heading={content.trainingRequest.heading}
                 description={content.trainingRequest.description}
-                bgColor={"#fafffb"}
             >
                 <Stack mx={"auto"} maxW={"xl"} px={{ base: 0, md: 6 }}>
-                    <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
+                    <Box
+                        rounded={"lg"}
+                        bg={"white"}
+                        boxShadow={"lg"}
+                        p={8}
+                        zIndex={1}
+                    >
                         <Stack spacing={4}>
                             <FormControl
                                 id="name"
@@ -231,6 +236,7 @@ const TrainingRequestPage: NextPage = (props) => {
                         </Stack>
                     </Box>
                 </Stack>
+                <FlowersPattern />
             </SectionContainer>
             <SuccesSubmitModal
                 isOpen={isOpen}
@@ -238,7 +244,7 @@ const TrainingRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} />
         </div>
     );
 };

@@ -24,6 +24,7 @@ import SuccesSubmitModal from "../components/modals/success-submit.modal";
 import DatePickerComp from "../components/pickers/date.picker";
 import TimePickerComp from "../components/pickers/time.picker";
 import { formatTime } from "../utils/date.util";
+import FlowersPattern from "../components/misc/flowers-pattern.misc";
 import Footer from "../components/navigation/footer.navigation";
 
 const MaintenanceRequestPage: NextPage = (props) => {
@@ -124,10 +125,10 @@ const MaintenanceRequestPage: NextPage = (props) => {
             <SectionContainer
                 heading={content.maintenanceRequest.heading}
                 description={content.maintenanceRequest.description}
-                bgColor={"#fafffb"}
+                
             >
                 <Stack mx={"auto"} maxW={"xl"} px={{ base: 0, md: 6 }}>
-                    <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
+                    <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8} zIndex={1}>
                         <Stack spacing={4}>
                             <FormControl
                                 id="name"
@@ -331,6 +332,7 @@ const MaintenanceRequestPage: NextPage = (props) => {
                         </Stack>
                     </Box>
                 </Stack>
+                <FlowersPattern/>
             </SectionContainer>
             <SuccesSubmitModal
                 isOpen={isOpen}
