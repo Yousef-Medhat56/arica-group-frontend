@@ -77,6 +77,10 @@ const NAV_ITEMS = (content: any): Array<NavItem> => {
             href: "/offers",
         },
         {
+            label: content.header.contact,
+            href: "/contact",
+        },
+        {
             label: content.header.about,
             href: "/about-us",
             children: [
@@ -88,7 +92,7 @@ const NAV_ITEMS = (content: any): Array<NavItem> => {
         },
         // {
         //     label: content.header.about,
-        //     href: "/about",
+        //     href: "/about-us",
         // },
         // {
         //     label: content.header.search,

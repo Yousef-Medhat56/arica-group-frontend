@@ -118,18 +118,6 @@ export default function Footer({ content }: { content: any }) {
                                         <FaWhatsapp />
                                     </SocialButton>
                                     <SocialButton
-                                        label={"Twitter"}
-                                        href={socialMedia.twitter}
-                                    >
-                                        <FaTwitter />
-                                    </SocialButton>
-                                    <SocialButton
-                                        label={"Linkedin"}
-                                        href={socialMedia.linkedin}
-                                    >
-                                        <FaLinkedin />
-                                    </SocialButton>
-                                    <SocialButton
                                         label={"Facebook"}
                                         href={socialMedia.facebook}
                                     >
@@ -140,6 +128,18 @@ export default function Footer({ content }: { content: any }) {
                                         href={socialMedia.instagram}
                                     >
                                         <FaInstagram />
+                                    </SocialButton>
+                                    <SocialButton
+                                        label={"Twitter"}
+                                        href={socialMedia.twitter}
+                                    >
+                                        <FaTwitter />
+                                    </SocialButton>
+                                    <SocialButton
+                                        label={"Linkedin"}
+                                        href={socialMedia.linkedin}
+                                    >
+                                        <FaLinkedin />
                                     </SocialButton>
                                 </Stack>
                             </Stack>
@@ -197,8 +197,28 @@ export default function Footer({ content }: { content: any }) {
                                     </Link>
                                 </NextLink>
                             </Stack>
-                            <Stack align={"flex-start"} zIndex={0}>
-                                <ListHeader>{content.lang.lang}</ListHeader>
+                            <Stack align={"flex-start"} justify={"space-between"} zIndex={0}>
+                                <ListHeader>
+                                    <NextLink href="/offers" passHref>
+                                        {content.header.offers}
+                                    </NextLink>
+                                </ListHeader>
+                                <ListHeader>
+                                    <NextLink href="/search" passHref>
+                                        {content.header.search}
+                                    </NextLink>
+                                </ListHeader>
+                                <ListHeader>
+                                    <NextLink href="/contact" passHref>
+                                        {content.header.contact}
+                                    </NextLink>
+                                </ListHeader>
+                                <ListHeader>
+                                    <NextLink href="/about-us" passHref>
+                                        {content.header.about}
+                                    </NextLink>
+                                </ListHeader>
+                                {/* <ListHeader>{content.lang.lang}</ListHeader>
                                 <Select
                                     value={router.locale}
                                     placeholder={content.lang.lang}
@@ -215,7 +235,7 @@ export default function Footer({ content }: { content: any }) {
                                     <option value={"en"}>
                                         {content.lang.en}
                                     </option>
-                                </Select>
+                                </Select> */}
                             </Stack>
                         </SimpleGrid>
                     </MainContainer>
@@ -229,7 +249,7 @@ export default function Footer({ content }: { content: any }) {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const socialMedia = await get(`/social-media`);
-    
+
     return {
         props: {
             socialMedia,

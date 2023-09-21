@@ -38,7 +38,7 @@ const AboutUsPage: NextPage = (props) => {
     return (
         <div>
             <Head>
-                {/* <title>{isEnglish ? translated.title : offerData.title}</title> */}
+                <title>{content.about.title}</title>
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -47,7 +47,7 @@ const AboutUsPage: NextPage = (props) => {
             <div id="overview">
                 <ViewOnScroll>
                     <SectionContainer
-                        heading={"الشركة في سطور"}
+                        heading={content.about.sections.overview}
                         py={{ base: 8, md: 12 }}
                     >
                         <Stack
@@ -96,7 +96,7 @@ const AboutUsPage: NextPage = (props) => {
             <div id="history">
                 <ViewOnScroll>
                     <SectionContainer
-                        heading={"نبذة تاريخية عن الشركة"}
+                        heading={content.about.sections.history}
                         py={{ base: 8, md: 12 }}
                     >
                         <Stack
@@ -144,7 +144,7 @@ const AboutUsPage: NextPage = (props) => {
             <div id="vision">
                 <ViewOnScroll>
                     <SectionContainer
-                        heading={"الرؤية والرسالة"}
+                        heading={content.about.sections.visionAndMission}
                         py={{ base: 8, md: 12 }}
                     >
                         <Grid
@@ -157,14 +157,14 @@ const AboutUsPage: NextPage = (props) => {
                         >
                             <GridItem>
                                 <ServiceCard
-                                    serviceName={"الرؤية"}
+                                    serviceName={content.about.sections.vision}
                                     serviceDesc={data.vision}
                                     iconName={"vision.svg"}
                                 />
                             </GridItem>
                             <GridItem>
                                 <ServiceCard
-                                    serviceName={"الرسالة"}
+                                    serviceName={content.about.sections.mission}
                                     serviceDesc={data.message}
                                     iconName={"mission.svg"}
                                 />
@@ -177,7 +177,7 @@ const AboutUsPage: NextPage = (props) => {
             <div id="team">
                 <ViewOnScroll>
                     <SectionContainer
-                        heading={"مجلس إدارة الشركة"}
+                        heading={content.about.sections.team}
                         py={{ base: 8, md: 12 }}
                     >
                         <Grid

@@ -114,24 +114,20 @@ export default function Header({ content }) {
                             />
                         </Stack>
                         <HStack display={{ base: "none", lg: "flex" }}>
-                            <chakra.button
-                                cursor={"pointer"}
-                                as={"a"}
-                                href="/search"
-                                aria-label="Search"
-                                paddingEnd={1}
-                            >
-                                <Search2Icon />
+                            <chakra.button cursor={"pointer"} paddingEnd={1}>
+                                <NextLink href={"/search"}>
+                                    <Search2Icon />
+                                </NextLink>
                             </chakra.button>
 
                             <a
                                 href={
                                     isEnglish
                                         ? process.env
-                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
+                                              .NEXT_PUBLIC_FRONTEND_DOMAIN +
                                           "/ar"
                                         : process.env
-                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
+                                              .NEXT_PUBLIC_FRONTEND_DOMAIN +
                                           "/en"
                                 }
                             >
@@ -354,13 +350,13 @@ const MobileNav = ({ content }) => {
                     </Text>
                 </Flex>
             </NextLink>
-            <a href={ isEnglish
-                                        ? process.env
-                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
-                                          "/ar"
-                                        : process.env
-                                              .NEXT_PUBLIC_FRONEND_DOMAIN +
-                                          "/en"}>
+            <a
+                href={
+                    isEnglish
+                        ? process.env.NEXT_PUBLIC_FRONTEND_DOMAIN + "/ar"
+                        : process.env.NEXT_PUBLIC_FRONTEND_DOMAIN + "/en"
+                }
+            >
                 <Flex
                     py={2}
                     justify={"space-between"}

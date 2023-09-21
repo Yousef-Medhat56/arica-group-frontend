@@ -30,20 +30,18 @@ const ContactPage: NextPage = (props) => {
             </Head>
             <Header content={content} />
 
-<Stack mt={{ base: 3, md: 7 }} mb={{base: 4, md: 14}}>
-            <SectionContainer
-                heading={content.contact.heading}
-                description={content.contact.description}
-            >
-                <Stack
-                    mx={"auto"}
-                    maxW={"xl"}
-                    align={"center"}
-                    px={{ base: 0, md: 6 }}
-                   
-                    
+            <Stack mt={{ base: 3, md: 7 }} mb={{ base: 4, md: 14 }}>
+                <SectionContainer
+                    heading={content.contact.heading}
+                    description={content.contact.description}
                 >
-                    {/* <Heading
+                    <Stack
+                        mx={"auto"}
+                        maxW={"xl"}
+                        align={"center"}
+                        px={{ base: 0, md: 6 }}
+                    >
+                        {/* <Heading
                         color={"text.secondary"}
                         fontSize={"md"}
                         fontWeight={400}
@@ -52,45 +50,45 @@ const ContactPage: NextPage = (props) => {
                     >
                         {content.contact.choose}
                     </Heading> */}
-                    <Stack
-                        direction={"row"}
-                        spacing={6}
-                        className="socialMediaIcons"
-                  
-                    >
-                        <SocialButton
-                            label={"Whatsapp"}
-                            href={socialMedia.whatsapp}
+                        <Stack
+                            direction={"row"}
+                            spacing={6}
+                            className="socialMediaIcons"
                         >
-                            <FaWhatsapp />
-                        </SocialButton>
-                        <SocialButton
-                            label={"Twitter"}
-                            href={socialMedia.twitter}
-                        >
-                            <FaTwitter />
-                        </SocialButton>
-                        <SocialButton
-                            label={"Linkedin"}
-                            href={socialMedia.linkedin}
-                        >
-                            <FaLinkedin />
-                        </SocialButton>
-                        <SocialButton
-                            label={"Facebook"}
-                            href={socialMedia.facebook}
-                        >
-                            <FaFacebook />
-                        </SocialButton>
-                        <SocialButton
-                            label={"Instagram"}
-                            href={socialMedia.instagram}
-                        >
-                            <FaInstagram />
-                        </SocialButton>
+                            <SocialButton
+                                label={"Whatsapp"}
+                                href={socialMedia.whatsapp}
+                            >
+                                <FaWhatsapp />
+                            </SocialButton>
+                            <SocialButton
+                                label={"Facebook"}
+                                href={socialMedia.facebook}
+                            >
+                                <FaFacebook />
+                            </SocialButton>
+                            <SocialButton
+                                label={"Instagram"}
+                                href={socialMedia.instagram}
+                            >
+                                <FaInstagram />
+                            </SocialButton>
+                            <SocialButton
+                                label={"Twitter"}
+                                href={socialMedia.twitter}
+                            >
+                                <FaTwitter />
+                            </SocialButton>
+                            <SocialButton
+                                label={"Linkedin"}
+                                href={socialMedia.linkedin}
+                            >
+                                <FaLinkedin />
+                            </SocialButton>
+                        </Stack>
                     </Stack>
-                </Stack>
-            </SectionContainer></Stack>
+                </SectionContainer>
+            </Stack>
 
             {/* Footer  */}
             <Footer content={content} />
