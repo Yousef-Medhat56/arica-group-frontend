@@ -17,8 +17,9 @@ const ElectricityNetworksPage: NextPage = (props) => {
         content,
         services,
         features,
-    }: { content: any; services: any[]; features: any[] } = props;
-    
+        brand,
+    }: { content: any; services: any[]; features: any[]; brand: any } = props;
+
     return (
         <div>
             <Head>
@@ -27,7 +28,10 @@ const ElectricityNetworksPage: NextPage = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content} />
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
             <ViewOnScroll>
                 <SectionContainer
                     heading={content.electricityNetworks.heading}
@@ -50,7 +54,11 @@ const ElectricityNetworksPage: NextPage = (props) => {
                             );
                         })}
 
-                        <Heading as={"h2"} fontSize={{base:"lg",lg:"xl"}}  marginTop={20}>
+                        <Heading
+                            as={"h2"}
+                            fontSize={{ base: "lg", lg: "xl" }}
+                            marginTop={20}
+                        >
                             {content.electricityNetworks.why}
                         </Heading>
                         <Grid
@@ -87,7 +95,7 @@ const ElectricityNetworksPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
@@ -100,13 +108,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/electricity-networks-page?populate[service][populate]=*&populate[why_us][populate]=*`,
         ctx.locale
     );
-   
+    const brand = await get(`/brand?populate=*`, ctx.locale);
     return {
         props: {
             content,
             services: pageData.data.attributes.service,
             features: pageData.data.attributes.why_us,
+            brand:brand.data
         },
-        revalidate: 10
+        revalidate: 10,
     };
 };

@@ -10,7 +10,6 @@ import {
     GridItem,
 } from "@chakra-ui/react";
 
-const BACKEND_DOMAIN = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
 
 export interface ProjectCardProps {
     content?: any;
@@ -57,7 +56,7 @@ export default function ProjectCard({
                             pos={"relative"}
                         >
                             <Image
-                                src={BACKEND_DOMAIN + imgSrc}
+                                src={imgSrc}
                                 alt={title}
                                 w="full"
                                 fit={"cover"}

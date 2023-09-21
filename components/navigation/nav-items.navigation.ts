@@ -8,7 +8,7 @@ interface NavItem {
     description?: string;
 }
 
-const NAV_ITEMS = (content: any): Array<NavItem> => {
+const NAV_ITEMS = (content: any, services?: any): Array<NavItem> => {
     return [
         {
             label: content.header.services,
@@ -17,56 +17,59 @@ const NAV_ITEMS = (content: any): Array<NavItem> => {
                 {
                     label: content.services.designGardens.name,
                     subLabel: content.services.designGardens.shortDesc,
-                    description: content.services.designGardens.longDesc,
+                    description: services && services.gardens,
                     href: "/gardens",
                     iconName: "design-gardens.svg",
                 },
                 {
                     label: content.services.maintenanceWork.name,
                     subLabel: content.services.maintenanceWork.shortDesc,
-                    description: content.services.maintenanceWork.longDesc,
+                    description: services && services.maintainance,
                     iconName: "maintenance-work.svg",
                     href: "/maintenance-request",
                 },
                 {
                     label: content.services.swimmingPools.name,
                     subLabel: content.services.swimmingPools.shortDesc,
-                    description: content.services.swimmingPools.longDesc,
+                    description: services && services.swimming_pools,
                     iconName: "swimming-pools.svg",
                     href: "/swimming-pools",
                 },
                 {
                     label: content.services.foundations.name,
                     subLabel: content.services.foundations.shortDesc,
-                    description: content.services.foundations.longDesc,
+                    description: services && services.fountains,
                     iconName: "fountain.svg",
                     href: "/fountains",
                 },
                 {
                     label: content.services.irrigationNetworks.name,
                     subLabel: content.services.irrigationNetworks.shortDesc,
-                    description: content.services.irrigationNetworks.longDesc,
+                    description:
+                        services && services.irrigation_networks,
                     iconName: "irrigation-network.svg",
                     href: "/irrigation-networks",
                 },
                 {
                     label: content.services.electricyNetwork.name,
                     subLabel: content.services.electricyNetwork.shortDesc,
-                    description: content.services.electricyNetwork.longDesc,
+                    description:
+                        services && services.electricity_networks,
                     iconName: "electricity-network.svg",
                     href: "/electricity-networks",
                 },
                 {
                     label: content.services.gardenAcc.name,
                     subLabel: content.services.gardenAcc.shortDesc,
-                    description: content.services.gardenAcc.longDesc,
+                    description: services && services.accessories,
                     iconName: "garden-acc.svg",
                     href: "/accessories",
                 },
                 {
                     label: content.services.studentTraining.name,
                     subLabel: content.services.studentTraining.shortDesc,
-                    description: content.services.studentTraining.longDesc,
+                    description:
+                        services && services.student_training,
                     iconName: "student-training.svg",
                     href: "/student-training",
                 },
@@ -84,10 +87,10 @@ const NAV_ITEMS = (content: any): Array<NavItem> => {
             label: content.header.about,
             href: "/about-us",
             children: [
-                { label: content.about.overview,href:"/about-us#overview" },
-                { label: content.about.history ,href:"/about-us#history" },
-                { label: content.about.vision,href:"/about-us#vision"  },
-                { label: content.about.team,href:"/about-us#team"  },
+                { label: content.about.overview, href: "/about-us#overview" },
+                { label: content.about.history, href: "/about-us#history" },
+                { label: content.about.vision, href: "/about-us#vision" },
+                { label: content.about.team, href: "/about-us#team" },
             ],
         },
         // {

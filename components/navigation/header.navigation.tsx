@@ -30,14 +30,12 @@ import MainContainer from "../containers/main.container";
 import ImageComp from "../misc/image.misc";
 import GradientButton from "../buttons/gradient.button";
 
-//images
-import Logo from "../../public/images/logo.png";
 
 //Nav items
 import NAV_ITEMS, { NavItem } from "./nav-items.navigation";
 import { useRouter } from "next/router";
 //@ts-ignore
-export default function Header({ content }) {
+export default function Header({ content,logo }) {
     const { isOpen, onToggle } = useDisclosure();
     const router = useRouter();
     const isEnglish = router.locale == "en";
@@ -60,9 +58,10 @@ export default function Header({ content }) {
                                     align={"center"}
                                 >
                                     <ImageComp
-                                        src={Logo}
+                                        src={logo}
                                         alt={"Arica Group logo"}
                                         width={"140px"}
+                                        height={"60px"}
                                         objectFit={"contain"}
                                     />
                                 </Flex>

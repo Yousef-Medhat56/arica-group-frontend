@@ -27,6 +27,8 @@ const Home: NextPage = (props) => {
         //@ts-ignore
         content,
         //@ts-ignore
+        brand,
+        //@ts-ignore
         featuredClients,
         //@ts-ignore
         galleryImages,
@@ -38,7 +40,11 @@ const Home: NextPage = (props) => {
         offers,
         //@ts-ignore
         stats,
+        //@ts-ignore
+        services,
     } = props;
+
+    
     return (
         <div>
             <Head>
@@ -47,9 +53,9 @@ const Home: NextPage = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content} />
+            <Header content={content}  logo={brand.attributes.logo.data.attributes.url} />
             <MainContainer>
-                <Hero content={content} />
+                <Hero content={content} brand={brand}/>
             </MainContainer>
             {/* Featured clients  */}
             {featuredClients.length > 3 && (
@@ -62,7 +68,7 @@ const Home: NextPage = (props) => {
             {/* STATS section  */}
             <StatsSection content={content} stats={stats} />
             {/* Our services section  */}
-            <ServicesSection content={content} />
+            <ServicesSection content={content} services={services}/>
             {/* Gallery section  */}
             <GallerySection content={content} images={galleryImages} />
 
@@ -77,7 +83,7 @@ const Home: NextPage = (props) => {
             {/* scroll to up button  */}
             <ScrollUpButton />
             {/* Footer  */}
-            <Footer content={content} />
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
@@ -90,6 +96,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     );
 
     const galleryImages = await get("/galleries?populate=*", ctx.locale);
+    
     const projects = await get("/projects?populate[thumbnail]=*", ctx.locale);
 
     const reviews = await get("/reviews", ctx.locale);
@@ -118,18 +125,28 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/offers?${offersQuery}&sort=discount%3Adesc`,
         ctx.locale
     );
+    const services = await get(
+        `/services-description`,
+        ctx.locale
+    );
+    const brand = await get(
+        `/brand?populate=*`,
+        ctx.locale
+    );
 
     return {
         props: {
             content,
+            brand:brand.data,
             featuredClients: featuredClients.data,
             galleryImages: galleryImages.data,
             projects: projects.data,
             reviews: reviews.data,
             stats: stats.data.attributes,
             offers: offers.data,
+            services:services.data
         },
-        revalidate: 10,
+        revalidate: 30,
     };
 };
 export default Home;

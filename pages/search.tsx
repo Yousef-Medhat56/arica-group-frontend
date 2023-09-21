@@ -6,10 +6,11 @@ import localesUtil from "../utils/locales.util";
 import SectionContainer from "../components/containers/section.container";
 import Footer from "../components/navigation/footer.navigation";
 import SearchBar from "../components/search/searchbar";
+import { get } from "../adapters";
 
 const SearchPage: NextPage = (props) => {
     //@ts-ignore
-    const { content } = props;
+    const { content,brand } = props;
 
     return (
         <div>
@@ -18,7 +19,7 @@ const SearchPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} />
+            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
             <Stack mt={{ base: 3, md: 7 }} mb={{ base: 12, md: 14 }}>
                 <SectionContainer
                     heading={content.search.heading}
@@ -36,18 +37,22 @@ const SearchPage: NextPage = (props) => {
             </Stack>
 
             {/* Footer  */}
-            <Footer content={content} />
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
-
+    const brand = await get(
+        `/brand?populate=*`,
+        ctx.locale
+    );
     return {
         props: {
             content,
-        },
+            brand:brand.data
+        },revalidate:60*5
     };
 };
 

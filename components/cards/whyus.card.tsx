@@ -2,7 +2,7 @@ import React from "react";
 import { VStack, Text, Heading } from "@chakra-ui/react";
 import NextChakraImg from "../misc/image.misc";
 
-const BACKEND_DOMAIN = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
+
 interface WhyUsCardProps {
     iconUrl: string;
     title:string;
@@ -16,7 +16,7 @@ export default function WhyUsCard({
     return (
         <VStack spacing={4} align="center">
             <NextChakraImg
-                src={`${BACKEND_DOMAIN}${iconUrl}`}
+                src={iconUrl}
                 alt={title}
                 height="70px"
                 width={"70px"}

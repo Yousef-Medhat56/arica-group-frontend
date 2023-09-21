@@ -3,24 +3,13 @@ import Head from "next/head";
 import Header from "../components/navigation/header.navigation";
 import { GetStaticProps, NextPage } from "next";
 import localesUtil from "../utils/locales.util";
-import SectionContainer from "../components/containers/section.container";
-import Footer, {
-    SocialButton,
-} from "../components/navigation/footer.navigation";
-import SearchBar from "../components/search/searchbar";
+import Footer from "../components/navigation/footer.navigation";
 import { get } from "../adapters";
-import {
-    FaFacebook,
-    FaInstagram,
-    FaLinkedin,
-    FaTwitter,
-    FaWhatsapp,
-} from "react-icons/fa";
 import GradientButton from "../components/buttons/gradient.button";
 
 const NotFoundPage: NextPage = (props) => {
     //@ts-ignore
-    const { content } = props;
+    const { content, brand } = props;
 
     return (
         <div>
@@ -29,11 +18,14 @@ const NotFoundPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} />
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
 
-<Center>
-            <Stack  py={{ base: 28, md: 36 }}>
-                <Heading
+            <Center>
+                <Stack py={{ base: 28, md: 36 }}>
+                    <Heading
                         color={"text.secondary"}
                         fontSize={"md"}
                         fontWeight={400}
@@ -42,22 +34,24 @@ const NotFoundPage: NextPage = (props) => {
                     >
                         {content.notfound.notfound}
                     </Heading>
-                    <GradientButton text={content.notfound.home} href="/"/>
-            </Stack></Center>
+                    <GradientButton text={content.notfound.home} href="/" />
+                </Stack>
+            </Center>
 
             {/* Footer  */}
-            <Footer content={content} />
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
-
+    const brand = await get(`/brand?populate=*`, ctx.locale);
     return {
         props: {
             content,
-        },
+            brand:brand.data
+        },revalidate:60*5
     };
 };
 

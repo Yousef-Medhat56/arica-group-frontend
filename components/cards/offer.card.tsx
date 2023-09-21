@@ -18,8 +18,6 @@ import { useRouter } from "next/router";
 import WithIconButton from "../buttons/with-icon.button";
 import { ClockOutlinedIcon } from "../icons/clock.icon";
 
-const BACKEND_DOMAIN = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
-
 export interface OfferCardProps {
     content: any;
     id: number;
@@ -83,7 +81,7 @@ export default function OfferCard({
                             pos={"relative"}
                         >
                             <Image
-                                src={BACKEND_DOMAIN + imgSrc}
+                                src={imgSrc}
                                 alt={title}
                                 w="full"
                                 fit={"cover"}

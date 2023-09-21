@@ -12,7 +12,7 @@ import Footer from "../components/navigation/footer.navigation";
 
 const OffersPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, accessories, accessoryTypes } = props;
+    const { content, accessories, accessoryTypes,brand } = props;
     return (
         <div>
             <Head>
@@ -21,7 +21,7 @@ const OffersPage: NextPage = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content} />
+            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
             <ViewOnScroll>
                 <SectionContainer
                     heading={content.accessories.heading}
@@ -40,7 +40,7 @@ const OffersPage: NextPage = (props) => {
             </ViewOnScroll>
 
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
@@ -143,9 +143,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         ctx.locale
     );
 
+    const brand = await get(
+        `/brand?populate=*`,
+        ctx.locale
+    );
     return {
         props: {
             content,
+            brand:brand.data,
             accessories: accessories.data,
             accessoryTypes: accessoryTypes.data,
         },

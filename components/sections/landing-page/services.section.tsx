@@ -7,8 +7,9 @@ import NAV_ITEMS, { NavItem } from "../../navigation/nav-items.navigation";
 import SectionContainer from "../../containers/section.container";
 import ViewOnScroll from "../../animation/view-on-scroll.animation";
 
-function ServicesSectionContent({ content }: { content: any }) {
-    const servicesArr = NAV_ITEMS(content)[0].children as NavItem[];
+function ServicesSectionContent({ content,services }: { content: any,services:any }) {
+    const servicesArr = NAV_ITEMS(content,services.attributes)[0].children as NavItem[];
+  
     return (
         <SectionContainer
             heading={content.servicesSection.heading}
@@ -35,9 +36,9 @@ function ServicesSectionContent({ content }: { content: any }) {
         </SectionContainer>
     );
 }
-export default function ServicesSection({ content }: { content: any }) {
-    const servicesArr = NAV_ITEMS(content)[0].children as NavItem[];
-    const [isSmallerThan426] = useMediaQuery("(max-width: 427px)");
+export default function ServicesSection({ content,services }: { content: any,services:any }) {
+    // const servicesArr = NAV_ITEMS(content)[0].children as NavItem[];
+    // const [isSmallerThan426] = useMediaQuery("(max-width: 427px)");
     return (
         <>
             {/* {isSmallerThan426 ? (
@@ -47,7 +48,7 @@ export default function ServicesSection({ content }: { content: any }) {
                     <ServicesSectionContent content={content} />
                 </ViewOnScroll>
             )} */}
-            <ServicesSectionContent content={content} />
+            <ServicesSectionContent content={content} services={services}/>
         </>
     );
 }

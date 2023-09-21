@@ -1,8 +1,5 @@
 import React from "react";
 import { VStack, Text, Image } from "@chakra-ui/react";
-import NextChakraImg from "../misc/image.misc";
-
-const BACKEND_DOMAIN = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
 
 interface GalleryCardProps {
     imgUrl: string;
@@ -12,7 +9,7 @@ export default function GalleryCard({ imgUrl, description }: GalleryCardProps) {
     return (
         <VStack spacing={4} align="center">
             <Image
-                src={`${BACKEND_DOMAIN}${imgUrl}`}
+                src={imgUrl}
                 alt={description}
                 height={[210, 300, 466]}
                 width={[320, 500, 700]}

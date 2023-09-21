@@ -23,11 +23,9 @@ import { useRouter } from "next/router";
 import { checkIfOfferAvailable } from "../../utils/offer.util";
 import { ClockOutlinedIcon } from "../../components/icons/clock.icon";
 
-const BACKEND_DOMAIN = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
-
 const SingleOfferPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, offerData } = props;
+    const { content, offerData,brand } = props;
     const router = useRouter();
     const offerId = router.query.id;
     const isEnglish =
@@ -41,7 +39,7 @@ const SingleOfferPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} />
+            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
 
             <SectionContainer
                 heading={isEnglish ? translated.title : offerData.title}
@@ -134,10 +132,7 @@ const SingleOfferPage: NextPage = (props) => {
                     </VStack>
                     <Box maxW={{ base: "350px", md: "60%", lg: "45%" }}>
                         <Image
-                            src={
-                                BACKEND_DOMAIN +
-                                offerData.image.data.attributes.url
-                            }
+                            src={offerData.image.data.attributes.url}
                             alt={offerData.title}
                             borderRadius={"md"}
                         />
@@ -146,7 +141,7 @@ const SingleOfferPage: NextPage = (props) => {
             </SectionContainer>
 
             {/* Footer  */}
-            <Footer content={content} />
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
@@ -163,10 +158,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
         if (!checkIfOfferAvailable(offerData.attributes)) throw new Error();
 
+        const brand = await get(
+            `/brand?populate=*`,
+            ctx.locale
+        );
         return {
             props: {
                 content,
                 offerData: offerData.attributes,
+                brand:brand.data
             },
         };
     } catch {

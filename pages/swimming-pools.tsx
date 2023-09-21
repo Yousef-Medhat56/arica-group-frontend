@@ -17,8 +17,9 @@ const SwimmingPoolsPage: NextPage = (props) => {
         content,
         services,
         features,
-    }: { content: any; services: any[]; features: any[] } = props;
-    console.log(features[0]);
+        brand,
+    }: { content: any; services: any[]; features: any[]; brand: any } = props;
+
     return (
         <div>
             <Head>
@@ -27,7 +28,10 @@ const SwimmingPoolsPage: NextPage = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content} />
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
             <ViewOnScroll>
                 <SectionContainer
                     heading={content.swimmingPools.heading}
@@ -50,7 +54,11 @@ const SwimmingPoolsPage: NextPage = (props) => {
                             );
                         })}
 
-                        <Heading as={"h2"} fontSize={{base:"lg",lg:"xl"}}  marginTop={20}>
+                        <Heading
+                            as={"h2"}
+                            fontSize={{ base: "lg", lg: "xl" }}
+                            marginTop={20}
+                        >
                             {content.swimmingPools.why}
                         </Heading>
                         <Grid
@@ -87,7 +95,7 @@ const SwimmingPoolsPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
@@ -100,12 +108,15 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/swimming-pools-page?populate[service][populate]=*&populate[why_us][populate]=*`,
         ctx.locale
     );
-    
+
+    const brand = await get(`/brand?populate=*`, ctx.locale);
     return {
         props: {
             content,
             services: pageData.data.attributes.service,
             features: pageData.data.attributes.why_us,
-        },revalidate: 10
+            brand:brand.data
+        },
+        revalidate: 10,
     };
 };

@@ -14,26 +14,19 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Header from "../components/navigation/header.navigation";
-import { GetServerSideProps, GetStaticProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import localesUtil from "../utils/locales.util";
 import SectionContainer from "../components/containers/section.container";
 import Footer from "../components/navigation/footer.navigation";
 
 import { get } from "../adapters";
-
-import GradientButton from "../components/buttons/gradient.button";
-import { useRouter } from "next/router";
-import { checkIfOfferAvailable } from "../utils/offer.util";
-import { ClockOutlinedIcon } from "../components/icons/clock.icon";
 import ViewOnScroll from "../components/animation/view-on-scroll.animation";
 import ReactMarkdown from "react-markdown";
 import ServiceCard from "../components/cards/service.card";
 
-const BACKEND_DOMAIN = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
-
 const AboutUsPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, data } = props;
+    const { content, data,brand } = props;
 
     return (
         <div>
@@ -42,7 +35,7 @@ const AboutUsPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} />
+            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
             {/* //OVERVIEW  */}
             <div id="overview">
                 <ViewOnScroll>
@@ -79,10 +72,7 @@ const AboutUsPage: NextPage = (props) => {
                                 display={{ base: "none", md: "block" }}
                             >
                                 <Image
-                                    src={
-                                        BACKEND_DOMAIN +
-                                        data.summary.image.data.attributes.url
-                                    }
+                                    src={data.summary.image.data.attributes.url}
                                     alt={""}
                                     borderRadius={"md"}
                                 />
@@ -128,10 +118,7 @@ const AboutUsPage: NextPage = (props) => {
                                 display={{ base: "none", md: "block" }}
                             >
                                 <Image
-                                    src={
-                                        BACKEND_DOMAIN +
-                                        data.history.image.data.attributes.url
-                                    }
+                                    src={data.history.image.data.attributes.url}
                                     alt={""}
                                     borderRadius={"md"}
                                 />
@@ -206,7 +193,7 @@ const AboutUsPage: NextPage = (props) => {
             </div>
 
             {/* Footer  */}
-            <Footer content={content} />
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
@@ -235,7 +222,7 @@ const TeamMemberCard = ({
                 w={"80px"}
                 h={"80px"}
                 borderRadius={"full"}
-                src={process.env.NEXT_PUBLIC_BACKEND_DOMAIN + imgUrl}
+                src={imgUrl}
                 alt={name}
             />
 
@@ -261,12 +248,17 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         ctx.locale
     );
 
+    const brand = await get(
+        `/brand?populate=*`,
+        ctx.locale
+    );
     return {
         props: {
             content,
             data: data.attributes,
+            brand:brand.data
         },
-        revalidate: 30,
+        revalidate: 60,
     };
 };
 

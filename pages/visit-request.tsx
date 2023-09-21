@@ -20,7 +20,7 @@ import SubmitButton from "../components/buttons/submit.button";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { post } from "../adapters";
+import { get, post } from "../adapters";
 import SuccesSubmitModal from "../components/modals/success-submit.modal";
 import DatePickerComp from "../components/pickers/date.picker";
 import TimePickerComp from "../components/pickers/time.picker";
@@ -30,7 +30,7 @@ import Footer from "../components/navigation/footer.navigation";
 
 const VisitRequestPage: NextPage = (props) => {
     //@ts-ignore
-    const { content } = props;
+    const { content, brand } = props;
 
     const schema = yup.object().shape({
         name: yup.string().required(content.visitRequest.errors.name.required),
@@ -116,7 +116,10 @@ const VisitRequestPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} />
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
 
             <SectionContainer
                 heading={content.visitRequest.heading}
@@ -306,7 +309,7 @@ const VisitRequestPage: NextPage = (props) => {
                         </Stack>
                     </Box>
                 </Stack>
-                <FlowersPattern/>
+                <FlowersPattern />
             </SectionContainer>
             <SuccesSubmitModal
                 isOpen={isOpen}
@@ -314,18 +317,20 @@ const VisitRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content} />
+            <Footer content={content} brand={brand} />
         </div>
     );
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
-
+    const brand = await get(`/brand?populate=*`, ctx.locale);
     return {
         props: {
             content,
+            brand: brand.data,
         },
+        revalidate: 60 * 5,
     };
 };
 

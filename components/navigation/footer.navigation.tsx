@@ -20,7 +20,6 @@ import {
 import ImageComp from "../misc/image.misc";
 
 //images
-import Logo from "../../public/images/logo.png";
 import MainContainer from "../containers/main.container";
 import { useRouter } from "next/router";
 import { get } from "../../adapters/index";
@@ -64,7 +63,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export default function Footer({ content }: { content: any }) {
+export default function Footer({ content,brand }: { content: any,brand:any }) {
     const router = useRouter();
     const [socialMedia, setSocialMedia] = useState(null);
 
@@ -96,9 +95,10 @@ export default function Footer({ content }: { content: any }) {
                                     <NextLink href="/" passHref>
                                         <Link>
                                             <ImageComp
-                                                src={Logo}
+                                                src={brand.attributes.logo.data.attributes.url}
                                                 alt={"Arica Group logo"}
                                                 width={"160px"}
+                                                height={"60px"}
                                                 objectFit={"contain"}
                                             />
                                         </Link>
@@ -108,7 +108,7 @@ export default function Footer({ content }: { content: any }) {
                                     fontSize={{ sm: "sm", md: "md" }}
                                     color={"text.secondary"}
                                 >
-                                    {content.hero.description}
+                                    {brand.attributes.gray_text}
                                 </Text>
                                 <Stack direction={"row"} spacing={6}>
                                     <SocialButton

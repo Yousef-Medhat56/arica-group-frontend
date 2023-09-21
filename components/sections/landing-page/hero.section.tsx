@@ -10,7 +10,7 @@ import {
 import ViewOnScroll from "../../animation/view-on-scroll.animation";
 import GradientButton from "../../buttons/gradient.button";
 
-export default function Hero({ content }: { content: any }) {
+export default function Hero({ content,brand }: { content: any,brand:any }) {
     return (
         <ViewOnScroll>
             <Stack
@@ -38,16 +38,16 @@ export default function Hero({ content }: { content: any }) {
                         bgGradient="linear(to-l, brand.linear.from,  brand.linear.to)"
                         bgClip="text"
                     >
-                        {content.hero.gradientHeading}{" "}
+                        {brand.attributes.highlighted_text}{" "}
                     </Text>
-                    {content.hero.normalHeading}
+                    {brand.attributes.black_bold_text}
                 </Heading>
                 <Text
                     color={"text.secondary"}
                     mx="auto !important"
                     fontSize={{ base: "md", md: "18px", xl: "22px" }}
                 >
-                    {content.hero.description}
+                    {brand.attributes.gray_text}
                 </Text>
                 <Stack
                     direction={"column"}

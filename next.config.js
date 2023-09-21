@@ -8,7 +8,7 @@ const nextConfig = {
         defaultLocale: "ar",
         localeDetection: false,
     },
-    images: { domains: ["localhost"] },
+    images: { domains: ["localhost","res.cloudinary.com"] },
     async redirects() {
         return [
             {

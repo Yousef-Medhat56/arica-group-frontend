@@ -25,7 +25,7 @@ import FlowersPattern from "../components/misc/flowers-pattern.misc";
 
 const OfferRequestPage: NextPage = (props) => {
     //@ts-ignore
-    const { content } = props;
+    const { content, brand } = props;
     const router = useRouter();
     const offerId = router.query.offer;
 
@@ -90,7 +90,7 @@ const OfferRequestPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} />
+            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
 
             <SectionContainer
                 heading={content.offerRequest.heading}
@@ -191,7 +191,7 @@ const OfferRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content}/>
+            <Footer content={content} brand={brand}/>
         </div>
     );
 };
@@ -213,9 +213,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             ctx.locale
         );
 
+        const brand = await get(
+            `/brand?populate=*`,
+            ctx.locale
+        );
         return {
             props: {
                 content,
+                brand:brand.data
             },
         };
     } catch {
