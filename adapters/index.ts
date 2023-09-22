@@ -4,6 +4,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const Authorization = "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN;
 
 export const get = async (endpoint: string, locale?: string) => {
+    console.log(API_URL)
     const response = await axios.get(API_URL + endpoint, {
         params: { locale },
         headers: { Authorization },
@@ -28,6 +29,7 @@ export const get = async (endpoint: string, locale?: string) => {
 // };
 
 export const post = async (endpoint: string, data: {}, locale?: string) => {
+    console.log(API_URL + endpoint)
     const rawResponse = await fetch(API_URL + endpoint, {
         method: "POST",
         headers: {
