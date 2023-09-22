@@ -16,9 +16,12 @@ export const post = async (endpoint: string, data: {}, locale?: string) => {
     const response = await axios.post(
         API_URL + endpoint,
         { data },
+        
         {
             headers: { Authorization },
-        }
+            maxRedirects:0
+        },
+        
     );
 
     return response.data;
