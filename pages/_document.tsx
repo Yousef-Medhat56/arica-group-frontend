@@ -18,6 +18,10 @@ class MyDocument extends Document {
         return (
             <Html style={{ scrollBehavior: "smooth" }}>
                 <Head>
+                    <meta
+                        http-equiv="Content-Security-Policy"
+                        content="upgrade-insecure-requests"
+                    />
                     {/* Fonts */}
                     <link
                         rel="preload"
