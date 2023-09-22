@@ -20,10 +20,9 @@ import ReactMarkdown from "react-markdown";
 import SingleItemSlider from "../../components/slider/single-item.slider";
 import GalleryCard from "../../components/cards/gallery.card";
 
-
 const SingleProjectPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, projectData,brand } = props;
+    const { content, projectData, brand, socialMedia } = props;
     const router = useRouter();
 
     return (
@@ -33,7 +32,10 @@ const SingleProjectPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
 
             <SectionContainer
                 heading={projectData.title}
@@ -115,7 +117,7 @@ const SingleProjectPage: NextPage = (props) => {
             </SectionContainer>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -129,16 +131,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             `/projects/${projectId}?populate=*`,
             ctx.locale
         );
-        const brand = await get(
-            `/brand?populate=*`,
-            ctx.locale
-        );
+        const brand = await get(`/brand?populate=*`, ctx.locale);
+        const { data: socialMediaData } = await get(`/social-media`);
 
         return {
             props: {
                 content,
                 projectData: data.attributes,
-                brand:brand.data
+                brand: brand.data,
+                socialMedia: socialMediaData.attributes,
             },
         };
     } catch {

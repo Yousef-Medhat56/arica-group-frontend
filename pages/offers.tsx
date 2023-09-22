@@ -12,7 +12,7 @@ import Footer from "../components/navigation/footer.navigation";
 
 const OffersPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, offers, services,brand } = props;
+    const { content, offers, services,brand,socialMedia } = props;
     return (
         <div>
             <Head>
@@ -32,7 +32,7 @@ const OffersPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia}/>
         </div>
     );
 };
@@ -135,12 +135,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         `/brand?populate=*`,
         ctx.locale
     );
+    const { data } = await get(`/social-media`);
+
     return {
         props: {
             content,
             offers: offers.data,
             services: services.data,
-            brand:brand.data
+            brand:brand.data,
+            socialMedia: data.attributes,
+
         },
     };
 };

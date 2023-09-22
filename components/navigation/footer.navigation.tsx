@@ -63,15 +63,15 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export default function Footer({ content,brand }: { content: any,brand:any }) {
-    const router = useRouter();
-    const [socialMedia, setSocialMedia] = useState(null);
-
-    useEffect(() => {
-        get(`/social-media`).then(({ data }) =>
-            setSocialMedia(data.attributes)
-        );
-    }, []);
+export default function Footer({
+    content,
+    brand,
+    socialMedia,
+}: {
+    content: any;
+    brand: any;
+    socialMedia: any;
+}) {
 
     return (
         <>
@@ -95,7 +95,10 @@ export default function Footer({ content,brand }: { content: any,brand:any }) {
                                     <NextLink href="/" passHref>
                                         <Link>
                                             <ImageComp
-                                                src={brand.attributes.logo.data.attributes.url}
+                                                src={
+                                                    brand.attributes.logo.data
+                                                        .attributes.url
+                                                }
                                                 alt={"Arica Group logo"}
                                                 width={"160px"}
                                                 height={"60px"}
@@ -197,7 +200,11 @@ export default function Footer({ content,brand }: { content: any,brand:any }) {
                                     </Link>
                                 </NextLink>
                             </Stack>
-                            <Stack align={"flex-start"} justify={"space-between"} zIndex={0}>
+                            <Stack
+                                align={"flex-start"}
+                                justify={"space-between"}
+                                zIndex={0}
+                            >
                                 <ListHeader>
                                     <NextLink href="/offers" passHref>
                                         {content.header.offers}
@@ -247,13 +254,4 @@ export default function Footer({ content,brand }: { content: any,brand:any }) {
     );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-    const socialMedia = await get(`/social-media`);
 
-    return {
-        props: {
-            socialMedia,
-        },
-        revalidate: 60,
-    };
-};

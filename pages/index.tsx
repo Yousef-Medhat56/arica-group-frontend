@@ -42,6 +42,8 @@ const Home: NextPage = (props) => {
         stats,
         //@ts-ignore
         services,
+        //@ts-ignore
+        socialMedia,
     } = props;
 
     
@@ -83,7 +85,7 @@ const Home: NextPage = (props) => {
             {/* scroll to up button  */}
             <ScrollUpButton />
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia}/>
         </div>
     );
 };
@@ -133,6 +135,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/brand?populate=*`,
         ctx.locale
     );
+    const { data } = await get(`/social-media`);
 
     return {
         props: {
@@ -144,7 +147,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             reviews: reviews.data,
             stats: stats.data.attributes,
             offers: offers.data,
-            services:services.data
+            services:services.data,
+            socialMedia: data.attributes,
         },
         revalidate: 30,
     };

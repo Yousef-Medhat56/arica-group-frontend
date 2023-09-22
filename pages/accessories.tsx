@@ -12,7 +12,7 @@ import Footer from "../components/navigation/footer.navigation";
 
 const OffersPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, accessories, accessoryTypes,brand } = props;
+    const { content, accessories, accessoryTypes, brand, socialMedia } = props;
     return (
         <div>
             <Head>
@@ -21,7 +21,10 @@ const OffersPage: NextPage = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
             <ViewOnScroll>
                 <SectionContainer
                     heading={content.accessories.heading}
@@ -40,7 +43,7 @@ const OffersPage: NextPage = (props) => {
             </ViewOnScroll>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -143,16 +146,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         ctx.locale
     );
 
-    const brand = await get(
-        `/brand?populate=*`,
-        ctx.locale
-    );
+    const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data } = await get(`/social-media`);
+
     return {
         props: {
             content,
-            brand:brand.data,
+            brand: brand.data,
             accessories: accessories.data,
             accessoryTypes: accessoryTypes.data,
+            socialMedia: data.attributes,
         },
     };
 };

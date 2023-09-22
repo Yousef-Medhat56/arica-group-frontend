@@ -19,7 +19,7 @@ import {
 
 const ContactPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, socialMedia,brand } = props;
+    const { content, socialMedia, brand } = props;
 
     return (
         <div>
@@ -28,7 +28,10 @@ const ContactPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
 
             <Stack mt={{ base: 3, md: 7 }} mb={{ base: 4, md: 14 }}>
                 <SectionContainer
@@ -91,7 +94,7 @@ const ContactPage: NextPage = (props) => {
             </Stack>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -104,7 +107,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         props: {
             content,
             socialMedia: data.attributes,
-            brand:brand.data
+            brand: brand.data,
         },
         revalidate: 60,
     };

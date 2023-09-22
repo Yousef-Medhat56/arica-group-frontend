@@ -16,8 +16,16 @@ const IrrigationNetworksPage: NextPage = (props) => {
     const {
         content,
         services,
-        features,brand
-    }: { content: any; services: any[]; features: any[],brand:any } = props;
+        features,
+        brand,
+        socialMedia,
+    }: {
+        content: any;
+        services: any[];
+        features: any[];
+        brand: any;
+        socialMedia: any;
+    } = props;
 
     return (
         <div>
@@ -27,7 +35,10 @@ const IrrigationNetworksPage: NextPage = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
             <ViewOnScroll>
                 <SectionContainer
                     heading={content.irrigationNetworks.heading}
@@ -50,7 +61,11 @@ const IrrigationNetworksPage: NextPage = (props) => {
                             );
                         })}
 
-                        <Heading as={"h2"} fontSize={{base:"lg",lg:"xl"}}  marginTop={20}>
+                        <Heading
+                            as={"h2"}
+                            fontSize={{ base: "lg", lg: "xl" }}
+                            marginTop={20}
+                        >
                             {content.irrigationNetworks.why}
                         </Heading>
                         <Grid
@@ -87,7 +102,7 @@ const IrrigationNetworksPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -100,16 +115,17 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/irrigation-networks-page?populate[service][populate]=*&populate[why_us][populate]=*`,
         ctx.locale
     );
-    const brand = await get(
-        `/brand?populate=*`,
-        ctx.locale
-    );
+    const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data } = await get(`/social-media`);
+
     return {
         props: {
             content,
             services: pageData.data.attributes.service,
             features: pageData.data.attributes.why_us,
-            brand:brand.data
-        },revalidate: 10
+            brand: brand.data,
+            socialMedia: data.attributes,
+        },
+        revalidate: 30,
     };
 };

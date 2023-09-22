@@ -25,7 +25,7 @@ import FlowersPattern from "../components/misc/flowers-pattern.misc";
 
 const TrainingRequestPage: NextPage = (props) => {
     //@ts-ignore
-    const { content,brand } = props;
+    const { content,brand,socialMedia } = props;
 
     const schema = yup.object().shape({
         name: yup
@@ -244,7 +244,7 @@ const TrainingRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia}/>
         </div>
     );
 };
@@ -255,10 +255,12 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/brand?populate=*`,
         ctx.locale
     );
+    const { data } = await get(`/social-media`);
     return {
         props: {
             content,
-            brand:brand.data
+            brand:brand.data,
+            socialMedia: data.attributes,
         },revalidate:60*5
     };
 };

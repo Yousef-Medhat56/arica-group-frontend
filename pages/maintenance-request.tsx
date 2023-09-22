@@ -29,7 +29,7 @@ import Footer from "../components/navigation/footer.navigation";
 
 const MaintenanceRequestPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, brand } = props;
+    const { content, brand,socialMedia } = props;
 
     const schema = yup.object().shape({
         name: yup
@@ -346,7 +346,7 @@ const MaintenanceRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content} brand={brand} />
+            <Footer content={content} brand={brand} socialMedia={socialMedia}/>
         </div>
     );
 };
@@ -354,10 +354,13 @@ const MaintenanceRequestPage: NextPage = (props) => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
     const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data } = await get(`/social-media`);
+
     return {
         props: {
             content,
             brand: brand.data,
+            socialMedia: data.attributes,
         },
         revalidate: 60 * 5,
     };

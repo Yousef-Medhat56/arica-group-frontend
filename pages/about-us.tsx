@@ -26,7 +26,7 @@ import ServiceCard from "../components/cards/service.card";
 
 const AboutUsPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, data,brand } = props;
+    const { content, data, brand, socialMedia } = props;
 
     return (
         <div>
@@ -35,7 +35,10 @@ const AboutUsPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
             {/* //OVERVIEW  */}
             <div id="overview">
                 <ViewOnScroll>
@@ -193,7 +196,7 @@ const AboutUsPage: NextPage = (props) => {
             </div>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -248,15 +251,15 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         ctx.locale
     );
 
-    const brand = await get(
-        `/brand?populate=*`,
-        ctx.locale
-    );
+    const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data: SocialMediaData } = await get(`/social-media`);
+
     return {
         props: {
             content,
             data: data.attributes,
-            brand:brand.data
+            brand: brand.data,
+            socialMedia: SocialMediaData.attributes,
         },
         revalidate: 60,
     };

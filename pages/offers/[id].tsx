@@ -25,7 +25,7 @@ import { ClockOutlinedIcon } from "../../components/icons/clock.icon";
 
 const SingleOfferPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, offerData,brand } = props;
+    const { content, offerData, brand, socialMedia } = props;
     const router = useRouter();
     const offerId = router.query.id;
     const isEnglish =
@@ -39,7 +39,10 @@ const SingleOfferPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
 
             <SectionContainer
                 heading={isEnglish ? translated.title : offerData.title}
@@ -141,7 +144,7 @@ const SingleOfferPage: NextPage = (props) => {
             </SectionContainer>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -158,15 +161,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
         if (!checkIfOfferAvailable(offerData.attributes)) throw new Error();
 
-        const brand = await get(
-            `/brand?populate=*`,
-            ctx.locale
-        );
+        const brand = await get(`/brand?populate=*`, ctx.locale);
+        const { data } = await get(`/social-media`);
+
         return {
             props: {
                 content,
                 offerData: offerData.attributes,
-                brand:brand.data
+                brand: brand.data,
+                socialMedia: data.attributes,
             },
         };
     } catch {

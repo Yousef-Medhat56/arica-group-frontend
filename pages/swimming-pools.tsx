@@ -18,7 +18,14 @@ const SwimmingPoolsPage: NextPage = (props) => {
         services,
         features,
         brand,
-    }: { content: any; services: any[]; features: any[]; brand: any } = props;
+        socialMedia,
+    }: {
+        content: any;
+        services: any[];
+        features: any[];
+        brand: any;
+        socialMedia: any;
+    } = props;
 
     return (
         <div>
@@ -95,7 +102,7 @@ const SwimmingPoolsPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -110,13 +117,15 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     );
 
     const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data } = await get(`/social-media`);
     return {
         props: {
             content,
             services: pageData.data.attributes.service,
             features: pageData.data.attributes.why_us,
-            brand:brand.data
+            brand: brand.data,
+            socialMedia: data.attributes,
         },
-        revalidate: 10,
+        revalidate: 30,
     };
 };

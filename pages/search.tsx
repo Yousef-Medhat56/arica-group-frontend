@@ -10,7 +10,7 @@ import { get } from "../adapters";
 
 const SearchPage: NextPage = (props) => {
     //@ts-ignore
-    const { content,brand } = props;
+    const { content, brand, socialMedia } = props;
 
     return (
         <div>
@@ -19,7 +19,10 @@ const SearchPage: NextPage = (props) => {
                 <meta name="description" content="Arica Group website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
             <Stack mt={{ base: 3, md: 7 }} mb={{ base: 12, md: 14 }}>
                 <SectionContainer
                     heading={content.search.heading}
@@ -37,22 +40,22 @@ const SearchPage: NextPage = (props) => {
             </Stack>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
-    const brand = await get(
-        `/brand?populate=*`,
-        ctx.locale
-    );
+    const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data } = await get(`/social-media`);
     return {
         props: {
             content,
-            brand:brand.data
-        },revalidate:60*5
+            brand: brand.data,
+            socialMedia: data.attributes,
+        },
+        revalidate: 60 * 5,
     };
 };
 

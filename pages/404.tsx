@@ -9,7 +9,7 @@ import GradientButton from "../components/buttons/gradient.button";
 
 const NotFoundPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, brand } = props;
+    const { content, brand, socialMedia } = props;
 
     return (
         <div>
@@ -39,7 +39,7 @@ const NotFoundPage: NextPage = (props) => {
             </Center>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -47,11 +47,15 @@ const NotFoundPage: NextPage = (props) => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
     const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data } = await get(`/social-media`);
+
     return {
         props: {
             content,
-            brand:brand.data
-        },revalidate:60*5
+            brand: brand.data,
+            socialMedia: data.attributes,
+        },
+        revalidate: 60 * 5,
     };
 };
 

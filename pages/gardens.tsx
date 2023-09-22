@@ -16,9 +16,17 @@ const GardensPage: NextPage = (props) => {
     const {
         content,
         services,
-        features,brand
-    }: { content: any; services: any[]; features: any[],brand:any } = props;
-   
+        features,
+        brand,
+        socialMedia,
+    }: {
+        content: any;
+        services: any[];
+        features: any[];
+        brand: any;
+        socialMedia: any;
+    } = props;
+
     return (
         <div>
             <Head>
@@ -27,7 +35,10 @@ const GardensPage: NextPage = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+            />
             <ViewOnScroll>
                 <SectionContainer
                     heading={content.gardens.heading}
@@ -91,7 +102,7 @@ const GardensPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content} brand={brand}/>
+            <Footer content={content} brand={brand} socialMedia={socialMedia} />
         </div>
     );
 };
@@ -104,17 +115,17 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/gardens-page?populate[service][populate]=*&populate[why_us][populate]=*`,
         ctx.locale
     );
-    const brand = await get(
-        `/brand?populate=*`,
-        ctx.locale
-    );
+    const brand = await get(`/brand?populate=*`, ctx.locale);
+    const { data } = await get(`/social-media`);
+
     return {
         props: {
             content,
             services: pageData.data.attributes.service,
             features: pageData.data.attributes.why_us,
-            brand:brand.data
+            brand: brand.data,
+            socialMedia: data.attributes,
         },
-        revalidate: 10,
+        revalidate: 30,
     };
 };
