@@ -12,17 +12,32 @@ export const get = async (endpoint: string, locale?: string) => {
     return response.data;
 };
 
-export const post = async (endpoint: string, data: {}, locale?: string) => {
-    const response = await axios.post(
-        API_URL + endpoint,
-        { data },
-        
-        {
-            headers: { Authorization },
-            maxRedirects:0
-        },
-        
-    );
+// export const post = async (endpoint: string, data: {}, locale?: string) => {
+//     const response = await axios.post(
+//         API_URL + endpoint,
+//         { data },
 
-    return response.data;
+//         {
+//             headers: { Authorization },
+//             maxRedirects:0,
+//             baseURL:API_URL + endpoint
+//         }
+//     );
+
+//     return response.data;
+// };
+
+export const post = async (endpoint: string, data: {}, locale?: string) => {
+    const rawResponse = await fetch(API_URL + endpoint, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: Authorization,
+        },
+        redirect: "manual",
+        body: JSON.stringify(data),
+    });
+    const content = await rawResponse.json();
+    return content.data;
 };
