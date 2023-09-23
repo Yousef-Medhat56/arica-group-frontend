@@ -59,7 +59,7 @@ export default function ReviewCard({
             </VStack>
             <Link href={reviewUrl} isExternal>
                 <HStack>
-                    <FacebookRoundedIcon w="24px" h="24px" />
+                    {/* <FacebookRoundedIcon w="24px" h="24px" /> */}
                     <Text>{name}</Text> <ExternalLinkIcon />
                 </HStack>
             </Link>
