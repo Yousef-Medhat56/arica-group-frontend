@@ -45,10 +45,11 @@ const AboutUsPage: NextPage = (props) => {
                 <meta
                     property="og:description"
                     content={`${content.about.description}`}
+                       
                 />
                 <meta
                     property="og:image"
-                    content={data.summary.image.data.attributes.url}
+                    content={brand.attributes.logo.data.attributes.url}
                 />
             </Head>
             <Header
