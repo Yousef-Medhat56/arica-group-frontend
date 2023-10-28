@@ -10,18 +10,38 @@ import { get } from "../adapters";
 
 const SearchPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, brand, socialMedia } = props;
+    const { content, brand, socialMedia,projectsNum } = props;
 
     return (
         <div>
             <Head>
                 <title>{content.search.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${content.search.description}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta
+                    property="og:title"
+                    content={content.search.title}
+                />
+                <meta
+                    property="og:description"
+                    content={`${content.search.description}`}
+                />
+                <meta
+                    property="og:image"
+                    content={brand.attributes.logo.data.attributes.url}
+                />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
             <Stack mt={{ base: 3, md: 7 }} mb={{ base: 12, md: 14 }}>
                 <SectionContainer
@@ -40,7 +60,7 @@ const SearchPage: NextPage = (props) => {
             </Stack>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer content={content} brand={brand} socialMedia={socialMedia}  projectsNum={projectsNum}/>
         </div>
     );
 };
@@ -49,11 +69,15 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
     const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data } = await get(`/social-media`);
+    const projects = await get("/projects", ctx.locale);
+
     return {
         props: {
             content,
             brand: brand.data,
             socialMedia: data.attributes,
+            projectsNum:projects.data.length
+
         },
         revalidate: 60 * 5,
     };

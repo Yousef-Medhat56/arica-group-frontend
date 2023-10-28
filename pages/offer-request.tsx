@@ -25,7 +25,7 @@ import FlowersPattern from "../components/misc/flowers-pattern.misc";
 
 const OfferRequestPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, brand, socialMedia } = props;
+    const { content, brand, socialMedia, projectsNum } = props;
     const router = useRouter();
     const offerId = router.query.offer;
 
@@ -87,12 +87,32 @@ const OfferRequestPage: NextPage = (props) => {
         <div>
             <Head>
                 <title>{content.offerRequest.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${content.offerRequest.description}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta
+                    property="og:title"
+                    content={content.offerRequest.title}
+                />
+                <meta
+                    property="og:description"
+                    content={`${content.offerRequest.description}`}
+                />
+                <meta
+                    property="og:image"
+                    content={brand.attributes.logo.data.attributes.url}
+                />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
 
             <SectionContainer
@@ -199,7 +219,12 @@ const OfferRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -223,12 +248,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
         const brand = await get(`/brand?populate=*`, ctx.locale);
         const { data } = await get(`/social-media`);
+        const projects = await get("/projects", ctx.locale);
 
         return {
             props: {
                 content,
                 brand: brand.data,
                 socialMedia: data.attributes,
+                projectsNum: projects.data.length,
             },
         };
     } catch {

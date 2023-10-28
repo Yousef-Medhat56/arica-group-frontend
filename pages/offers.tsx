@@ -12,16 +12,48 @@ import Footer from "../components/navigation/footer.navigation";
 
 const OffersPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, offers, services,brand,socialMedia } = props;
+    const { content, offers, services, brand, socialMedia, projectsNum } =
+        props;
     return (
         <div>
             <Head>
                 <title>{content.offersSection.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${content.offersSection.description} ${offers.map(
+                        (offer) => {
+                            return offer.attributes.title;
+                        }
+                    )}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta property="og:title" content={content.accessories.title} />
+                <meta
+                    property="og:description"
+                    content={`${
+                        content.offersSection.description
+                    } ${offers.map((offer) => {
+                        return offer.attributes.title;
+                    })}`}
+                />
+                <meta
+                    property="og:image"
+                    content={
+                        offers[0] &&
+                        offers[0].attributes.image.data.attributes.url
+                    }
+                />
             </Head>
 
-            <Header content={content} logo={brand.attributes.logo.data.attributes.url}/>
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
+            />
             <ViewOnScroll>
                 <SectionContainer
                     heading={content.offersSection.heading}
@@ -32,7 +64,12 @@ const OffersPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia}/>
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -131,20 +168,18 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     );
     const services = await get(`/services?${servicesQuery}`, ctx.locale);
 
-    const brand = await get(
-        `/brand?populate=*`,
-        ctx.locale
-    );
+    const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data } = await get(`/social-media`);
+    const projects = await get("/projects", ctx.locale);
 
     return {
         props: {
             content,
             offers: offers.data,
             services: services.data,
-            brand:brand.data,
+            brand: brand.data,
             socialMedia: data.attributes,
-
+            projectsNum: projects.data.length,
         },
     };
 };

@@ -30,12 +30,11 @@ import MainContainer from "../containers/main.container";
 import ImageComp from "../misc/image.misc";
 import GradientButton from "../buttons/gradient.button";
 
-
 //Nav items
 import NAV_ITEMS, { NavItem } from "./nav-items.navigation";
 import { useRouter } from "next/router";
 //@ts-ignore
-export default function Header({ content,logo }) {
+export default function Header({ content, logo, projectsNum }) {
     const { isOpen, onToggle } = useDisclosure();
     const router = useRouter();
     const isEnglish = router.locale == "en";
@@ -105,8 +104,12 @@ export default function Header({ content,logo }) {
                             spacing={5}
                         >
                             <Flex display={{ base: "none", lg: "flex" }}>
-                                <DesktopNav content={content} />
+                                <DesktopNav
+                                    content={content}
+                                    projectsNum={projectsNum}
+                                />
                             </Flex>
+
                             <GradientButton
                                 text={content.requests.visit}
                                 href={"/visit-request"}
@@ -136,7 +139,7 @@ export default function Header({ content,logo }) {
                     </HStack>
 
                     <Collapse in={isOpen} animateOpacity>
-                        <MobileNav content={content} />
+                        <MobileNav content={content} projectsNum={projectsNum} />
                     </Collapse>
                 </MainContainer>
             </Box>
@@ -146,14 +149,14 @@ export default function Header({ content,logo }) {
 
 //Desktop Navbar
 //@ts-ignore
-const DesktopNav = ({ content }) => {
+const DesktopNav = ({ content, projectsNum }) => {
     const linkColor = "text.nav";
     const linkHoverColor = "black";
     const popoverContentBgColor = "white";
     const locale = content.locale;
 
     return (
-        <Stack direction={"row"} spacing={4}>
+        <Stack direction={"row"} spacing={4} align={"center"}>
             {NAV_ITEMS(content).map((navItem) => (
                 <Box key={navItem.label}>
                     <Popover
@@ -232,6 +235,22 @@ const DesktopNav = ({ content }) => {
                     </Popover>
                 </Box>
             ))}
+            {projectsNum > 3 && (
+                <NextLink href={"/projects"} passHref>
+                    <Link
+                        p={5}
+                        fontSize={"md"}
+                        fontWeight={500}
+                        color={linkColor}
+                        _hover={{
+                            textDecoration: "none",
+                            color: linkHoverColor,
+                        }}
+                    >
+                        {content.header.projects}
+                    </Link>
+                </NextLink>
+            )}
         </Stack>
     );
 };
@@ -320,7 +339,7 @@ const DesktopSubNav = ({
 
 //Mobile Nav
 //@ts-ignore
-const MobileNav = ({ content }) => {
+const MobileNav = ({ content,projectsNum }) => {
     const router = useRouter();
     const isEnglish = router.locale == "en";
     return (
@@ -335,6 +354,10 @@ const MobileNav = ({ content }) => {
             {NAV_ITEMS(content).map((navItem) => (
                 <MobileNavItem key={navItem.label} {...navItem} />
             ))}
+             {projectsNum > 3 && (
+                <MobileNavItem href={"/projects"} label={content.header.projects}/>
+                
+            )}
             <NextLink href={"/search"} passHref>
                 <Flex
                     py={2}

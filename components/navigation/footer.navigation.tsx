@@ -67,10 +67,12 @@ export default function Footer({
     content,
     brand,
     socialMedia,
+    projectsNum ,
 }: {
     content: any;
     brand: any;
     socialMedia: any;
+    projectsNum: number;
 }) {
     return (
         <>
@@ -159,7 +161,6 @@ export default function Footer({
                                         <FaLinkedin />
                                     </SocialButton>
                                 </Stack>
-                               
                             </Stack>
                             <Stack
                                 align={"flex-start"}
@@ -234,11 +235,19 @@ export default function Footer({
                                         {content.header.search}
                                     </NextLink>
                                 </ListHeader>
+                                {projectsNum > 3 && (
+                                    <ListHeader>
+                                        <NextLink href="/projects" passHref>
+                                            {content.header.projects}
+                                        </NextLink>
+                                    </ListHeader>
+                                )}
                                 <ListHeader>
                                     <NextLink href="/contact" passHref>
                                         {content.header.contact}
                                     </NextLink>
                                 </ListHeader>
+
                                 <ListHeader>
                                     <NextLink href="/about-us" passHref>
                                         {content.header.about}

@@ -19,25 +19,57 @@ const IrrigationNetworksPage: NextPage = (props) => {
         features,
         brand,
         socialMedia,
+        projectsNum
     }: {
         content: any;
         services: any[];
         features: any[];
         brand: any;
         socialMedia: any;
+        projectsNum:any
     } = props;
 
     return (
         <div>
             <Head>
                 <title>{content.irrigationNetworks.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${
+                        content.irrigationNetworks.description
+                    } ${services.map((service) => {
+                        return service.title;
+                    })}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta
+                    property="og:title"
+                    content={content.irrigationNetworks.title}
+                />
+                <meta
+                    property="og:description"
+                    content={`${
+                        content.irrigationNetworks.description
+                    } ${services.map((service) => {
+                        return service.title;
+                    })}`}
+                />
+                <meta
+                    property="og:image"
+                    content={
+                        services[0] && services[0].images.data[0].attributes.url
+                    }
+                />
             </Head>
 
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
             <ViewOnScroll>
                 <SectionContainer
@@ -102,7 +134,7 @@ const IrrigationNetworksPage: NextPage = (props) => {
                 </SectionContainer>
             </ViewOnScroll>
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer content={content} brand={brand} socialMedia={socialMedia}  projectsNum={projectsNum}/>
         </div>
     );
 };
@@ -117,6 +149,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     );
     const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data } = await get(`/social-media`);
+    const projects = await get("/projects", ctx.locale);
 
     return {
         props: {
@@ -125,6 +158,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             features: pageData.data.attributes.why_us,
             brand: brand.data,
             socialMedia: data.attributes,
+            projectsNum:projects.data.length
+
         },
         revalidate: 30,
     };

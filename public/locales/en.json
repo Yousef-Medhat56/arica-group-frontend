@@ -12,7 +12,8 @@
         "offers": "Offers",
         "about": "About",
         "search": "Search",
-        "contact":"Contact"
+        "contact":"Contact",
+        "projects":"Projects"
     },
     "about": {
         "title": "About us - Arica Group",
@@ -94,8 +95,10 @@
         "description": "Take a look at the different services we provide"
     },
     "projectsSection": {
+        "title":"Our Projects - Arica Group",
         "heading": "Our Projects",
-        "description": "Some of the projects that we worked on"
+        "description": "Some of the projects that we worked on",
+        "viewMore":"View more of our projects"
     },
     "gallerySection": {
         "heading": "Gallery",

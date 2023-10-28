@@ -25,7 +25,7 @@ import { ClockOutlinedIcon } from "../../components/icons/clock.icon";
 
 const SingleOfferPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, offerData, brand, socialMedia } = props;
+    const { content, offerData, brand, socialMedia, projectsNum } = props;
     const router = useRouter();
     const offerId = router.query.id;
     const isEnglish =
@@ -36,12 +36,26 @@ const SingleOfferPage: NextPage = (props) => {
         <div>
             <Head>
                 <title>{isEnglish ? translated.title : offerData.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta name="description" content={offerData.description} />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta property="og:title" content={offerData.title} />
+                <meta
+                    property="og:description"
+                    content={offerData.description}
+                />
+                <meta
+                    property="og:image"
+                    content={offerData.image.data.attributes.url}
+                />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
 
             <SectionContainer
@@ -144,7 +158,12 @@ const SingleOfferPage: NextPage = (props) => {
             </SectionContainer>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -163,6 +182,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
         const brand = await get(`/brand?populate=*`, ctx.locale);
         const { data } = await get(`/social-media`);
+        const projects = await get("/projects", ctx.locale);
 
         return {
             props: {
@@ -170,6 +190,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 offerData: offerData.attributes,
                 brand: brand.data,
                 socialMedia: data.attributes,
+                projectsNum: projects.data.length,
             },
         };
     } catch {

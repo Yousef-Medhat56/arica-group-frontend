@@ -30,7 +30,7 @@ import Footer from "../components/navigation/footer.navigation";
 
 const VisitRequestPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, brand, socialMedia } = props;
+    const { content, brand, socialMedia, projectsNum } = props;
 
     const schema = yup.object().shape({
         name: yup.string().required(content.visitRequest.errors.name.required),
@@ -113,12 +113,32 @@ const VisitRequestPage: NextPage = (props) => {
         <div>
             <Head>
                 <title>{content.visitRequest.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${content.visitRequest.description}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta
+                    property="og:title"
+                    content={content.visitRequest.title}
+                />
+                <meta
+                    property="og:description"
+                    content={`${content.visitRequest.description}`}
+                />
+                <meta
+                    property="og:image"
+                    content={brand.attributes.logo.data.attributes.url}
+                />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
 
             <SectionContainer
@@ -317,7 +337,12 @@ const VisitRequestPage: NextPage = (props) => {
                 content={content}
             />
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -326,11 +351,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
     const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data } = await get(`/social-media`);
+    const projects = await get("/projects", ctx.locale);
+
     return {
         props: {
             content,
             brand: brand.data,
             socialMedia: data.attributes,
+            projectsNum: projects.data.length,
         },
         revalidate: 60 * 5,
     };

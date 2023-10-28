@@ -12,7 +12,6 @@ export default function ProjectsSection({
     content: any;
     projects: any[];
 }) {
-    
     return projects.length ? (
         <ViewOnScroll>
             <SectionContainer
@@ -26,8 +25,8 @@ export default function ProjectsSection({
                     }}
                     gap={14}
                 >
-                    {/* show details of first 2 projects */}
-                    {projects.map((project, index) => (
+                    {/* show details of first 3 projects */}
+                    {projects.slice(0,3).map((project, index) => (
                         <ProjectCard
                             key={index}
                             id={project.id}
@@ -38,9 +37,20 @@ export default function ProjectsSection({
                             title={project.attributes.title}
                             description={project.attributes.breif}
                         />
-                        
                     ))}
+                    
                 </Grid>
+                {/* if there are more than 3 projects, show (view more) button */}
+                {projects.length > 3 && (
+                        <Center marginTop={16}>
+                            <GradientButton
+                                text={content.projectsSection.viewMore}
+                                href="/projects"
+                                // @ts-ignore
+                                paddingX={{ base: "32px", md: "48px" }}
+                            />
+                        </Center>
+                    )}
                 {/* if there are more than 3 projects, show (view more) button */}
                 {/* {projects.length > 3 && (
                     <Center marginTop={16}>

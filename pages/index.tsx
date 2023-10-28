@@ -46,18 +46,41 @@ const Home: NextPage = (props) => {
         socialMedia,
     } = props;
 
-    
+    const projectsNum = projects.length;
     return (
         <div>
             <Head>
                 <title>{content.landingTitle}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${brand.attributes.highlighted_text}. ${brand.attributes.black_bold_text}`}
+                />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta
+                    property="og:title"
+                    content={content.landingTitle}
+                />
+                <meta
+                    property="og:description"
+                    content={`${brand.attributes.highlighted_text}. ${brand.attributes.black_bold_text}`}
+                />
+                <meta
+                    property="og:image"
+                    content={brand.attributes.logo.data.attributes.url}
+                />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header content={content}  logo={brand.attributes.logo.data.attributes.url} />
+            <Header
+                content={content}
+                logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
+            />
             <MainContainer>
-                <Hero content={content} brand={brand}/>
+                <Hero content={content} brand={brand} />
             </MainContainer>
             {/* Featured clients  */}
             {featuredClients.length > 3 && (
@@ -70,7 +93,7 @@ const Home: NextPage = (props) => {
             {/* STATS section  */}
             <StatsSection content={content} stats={stats} />
             {/* Our services section  */}
-            <ServicesSection content={content} services={services}/>
+            <ServicesSection content={content} services={services} />
             {/* Gallery section  */}
             <GallerySection content={content} images={galleryImages} />
 
@@ -85,7 +108,12 @@ const Home: NextPage = (props) => {
             {/* scroll to up button  */}
             <ScrollUpButton />
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia}/>
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -98,7 +126,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     );
 
     const galleryImages = await get("/galleries?populate=*", ctx.locale);
-    
+
     const projects = await get("/projects?populate[thumbnail]=*", ctx.locale);
 
     const reviews = await get("/reviews", ctx.locale);
@@ -127,27 +155,21 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         `/offers?${offersQuery}&sort=discount%3Adesc`,
         ctx.locale
     );
-    const services = await get(
-        `/services-description`,
-        ctx.locale
-    );
-    const brand = await get(
-        `/brand?populate=*`,
-        ctx.locale
-    );
+    const services = await get(`/services-description`, ctx.locale);
+    const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data } = await get(`/social-media`);
 
     return {
         props: {
             content,
-            brand:brand.data,
+            brand: brand.data,
             featuredClients: featuredClients.data,
             galleryImages: galleryImages.data,
             projects: projects.data,
             reviews: reviews.data,
             stats: stats.data.attributes,
             offers: offers.data,
-            services:services.data,
+            services: services.data,
             socialMedia: data.attributes,
         },
         revalidate: 30,

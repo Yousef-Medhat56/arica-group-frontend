@@ -11,19 +11,62 @@ import OffersSection from "../components/sections/offers/offers.section";
 import Footer from "../components/navigation/footer.navigation";
 
 const OffersPage: NextPage = (props) => {
-    //@ts-ignore
-    const { content, accessories, accessoryTypes, brand, socialMedia } = props;
+    
+    const {
+        //@ts-ignore
+        content,
+        //@ts-ignore
+        accessories,
+        //@ts-ignore
+        accessoryTypes,
+        //@ts-ignore
+        brand,
+        //@ts-ignore
+        socialMedia,
+        //@ts-ignore
+        projectsNum,
+    } = props;
     return (
         <div>
             <Head>
                 <title>{content.accessories.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${
+                        content.offersSection.description
+                    } ${accessories.map((accessory) => {
+                        return accessory.attributes.title;
+                    })}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta
+                    property="og:title"
+                    content={content.accessories.title}
+                />
+                <meta
+                    property="og:description"
+                    content={`${
+                        content.offersSection.description
+                    } ${accessories.map((accessory) => {
+                        return accessory.attributes.title;
+                    })}`}
+                />
+                <meta
+                    property="og:image"
+                    content={
+                        accessories[0] && accessories[0].attributes.image.data.attributes.url
+                    }
+                />
             </Head>
 
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
             <ViewOnScroll>
                 <SectionContainer
@@ -43,7 +86,12 @@ const OffersPage: NextPage = (props) => {
             </ViewOnScroll>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -148,6 +196,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data } = await get(`/social-media`);
+    const projects = await get("/projects", ctx.locale);
 
     return {
         props: {
@@ -156,6 +205,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             accessories: accessories.data,
             accessoryTypes: accessoryTypes.data,
             socialMedia: data.attributes,
+            projectsNum: projects.data.length,
         },
     };
 };

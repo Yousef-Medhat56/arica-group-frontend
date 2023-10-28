@@ -22,19 +22,33 @@ import GalleryCard from "../../components/cards/gallery.card";
 
 const SingleProjectPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, projectData, brand, socialMedia } = props;
+    const { content, projectData, brand, socialMedia, projectsNum } = props;
     const router = useRouter();
 
     return (
         <div className="overflowx-hidden">
             <Head>
                 <title>{projectData.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta name="description" content={projectData.breif} />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta property="og:title" content={projectData.title} />
+                <meta
+                    property="og:description"
+                    content={projectData.breif}
+                />
+                <meta
+                    property="og:image"
+                    content={projectData.thumbnail.data.attributes.url}
+                />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
 
             <SectionContainer
@@ -117,7 +131,12 @@ const SingleProjectPage: NextPage = (props) => {
             </SectionContainer>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -133,13 +152,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         );
         const brand = await get(`/brand?populate=*`, ctx.locale);
         const { data: socialMediaData } = await get(`/social-media`);
-
+        const projects = await get("/projects", ctx.locale);
         return {
             props: {
                 content,
                 projectData: data.attributes,
                 brand: brand.data,
                 socialMedia: socialMediaData.attributes,
+                projectsNum: projects.data.length,
             },
         };
     } catch {

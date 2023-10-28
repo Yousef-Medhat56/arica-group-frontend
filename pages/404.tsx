@@ -9,18 +9,19 @@ import GradientButton from "../components/buttons/gradient.button";
 
 const NotFoundPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, brand, socialMedia } = props;
+    const { content, brand, socialMedia, projectsNum } = props;
 
     return (
         <div>
             <Head>
                 <title>{content.notfound.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta name="description" content= {content.notfound.notfound} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
 
             <Center>
@@ -39,7 +40,12 @@ const NotFoundPage: NextPage = (props) => {
             </Center>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -48,12 +54,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
     const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data } = await get(`/social-media`);
+    const projects = await get("/projects", ctx.locale);
 
     return {
         props: {
             content,
             brand: brand.data,
             socialMedia: data.attributes,
+            projectsNum: projects.data.length,
         },
         revalidate: 60 * 5,
     };

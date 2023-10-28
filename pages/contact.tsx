@@ -18,18 +18,42 @@ import { FaXTwitter } from "react-icons/fa6";
 import { AiOutlinePhone } from "react-icons/ai";
 const ContactPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, socialMedia, brand } = props;
+    const { content, socialMedia, brand, projectsNum } = props;
 
     return (
         <div>
             <Head>
                 <title>{content.contact.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${content.contact.description}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta property="og:title" content={content.contact.title} />
+                <meta
+                    property="og:description"
+                    content={`${content.contact.description} 
+                    ${socialMedia.phone}
+                    ${socialMedia.facebook}  
+                    ${socialMedia.twitter} 
+                    ${socialMedia.instagram}
+                    ${socialMedia.twitter}
+                    ${socialMedia.linkedin}
+                       `}
+                />
+                <meta
+                    property="og:image"
+                    content={brand.attributes.logo.data.attributes.url}
+                />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
 
             <Stack mt={{ base: 3, md: 7 }} mb={{ base: 4, md: 12 }}>
@@ -43,7 +67,11 @@ const ContactPage: NextPage = (props) => {
                         align={"center"}
                         px={{ base: 0, md: 6 }}
                     >
-                        <Stack direction={"row"} alignItems={"center"} mb={{base:4,md:6}}>
+                        <Stack
+                            direction={"row"}
+                            alignItems={"center"}
+                            mb={{ base: 4, md: 6 }}
+                        >
                             <Icon
                                 as={AiOutlinePhone}
                                 height={8}
@@ -99,7 +127,12 @@ const ContactPage: NextPage = (props) => {
             </Stack>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -108,11 +141,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const content = localesUtil(ctx);
     const { data } = await get(`/social-media`);
     const brand = await get(`/brand?populate=*`, ctx.locale);
+    const projects = await get("/projects", ctx.locale);
+
     return {
         props: {
             content,
             socialMedia: data.attributes,
             brand: brand.data,
+            projectsNum: projects.data.length,
         },
         revalidate: 60,
     };

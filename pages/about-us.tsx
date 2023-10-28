@@ -26,18 +26,35 @@ import ServiceCard from "../components/cards/service.card";
 
 const AboutUsPage: NextPage = (props) => {
     //@ts-ignore
-    const { content, data, brand, socialMedia } = props;
+    const { content, data, brand, socialMedia, projectsNum } = props;
 
     return (
         <div>
             <Head>
                 <title>{content.about.title}</title>
-                <meta name="description" content="Arica Group website" />
+                <meta
+                    name="description"
+                    content={`${content.about.description}`}
+                />
                 <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta property="og:title" content={content.about.title} />
+                <meta
+                    property="og:description"
+                    content={`${content.about.description}`}
+                />
+                <meta
+                    property="og:image"
+                    content={data.summary.image.data.attributes.url}
+                />
             </Head>
             <Header
                 content={content}
                 logo={brand.attributes.logo.data.attributes.url}
+                projectsNum={projectsNum}
             />
             {/* //OVERVIEW  */}
             <div id="overview">
@@ -196,7 +213,12 @@ const AboutUsPage: NextPage = (props) => {
             </div>
 
             {/* Footer  */}
-            <Footer content={content} brand={brand} socialMedia={socialMedia} />
+            <Footer
+                content={content}
+                brand={brand}
+                socialMedia={socialMedia}
+                projectsNum={projectsNum}
+            />
         </div>
     );
 };
@@ -253,6 +275,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
     const brand = await get(`/brand?populate=*`, ctx.locale);
     const { data: SocialMediaData } = await get(`/social-media`);
+    const projects = await get("/projects", ctx.locale);
 
     return {
         props: {
@@ -260,6 +283,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             data: data.attributes,
             brand: brand.data,
             socialMedia: SocialMediaData.attributes,
+            projectsNum: projects.data.length,
         },
         revalidate: 60,
     };
