@@ -1,4 +1,4 @@
-import { Heading, Stack } from "@chakra-ui/react";
+import { Heading, Icon, Stack, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import Header from "../components/navigation/header.navigation";
 import { GetStaticProps, NextPage } from "next";
@@ -7,16 +7,15 @@ import SectionContainer from "../components/containers/section.container";
 import Footer, {
     SocialButton,
 } from "../components/navigation/footer.navigation";
-import SearchBar from "../components/search/searchbar";
 import { get } from "../adapters";
 import {
     FaFacebook,
     FaInstagram,
     FaLinkedin,
-    FaTwitter,
     FaWhatsapp,
 } from "react-icons/fa";
-
+import { FaXTwitter } from "react-icons/fa6";
+import { AiOutlinePhone } from "react-icons/ai";
 const ContactPage: NextPage = (props) => {
     //@ts-ignore
     const { content, socialMedia, brand } = props;
@@ -33,7 +32,7 @@ const ContactPage: NextPage = (props) => {
                 logo={brand.attributes.logo.data.attributes.url}
             />
 
-            <Stack mt={{ base: 3, md: 7 }} mb={{ base: 4, md: 14 }}>
+            <Stack mt={{ base: 3, md: 7 }} mb={{ base: 4, md: 12 }}>
                 <SectionContainer
                     heading={content.contact.heading}
                     description={content.contact.description}
@@ -44,15 +43,21 @@ const ContactPage: NextPage = (props) => {
                         align={"center"}
                         px={{ base: 0, md: 6 }}
                     >
-                        {/* <Heading
-                        color={"text.secondary"}
-                        fontSize={"md"}
-                        fontWeight={400}
-                        textAlign={"center"}
-                        pb={4}
-                    >
-                        {content.contact.choose}
-                    </Heading> */}
+                        <Stack direction={"row"} alignItems={"center"} mb={{base:4,md:6}}>
+                            <Icon
+                                as={AiOutlinePhone}
+                                height={8}
+                                width={8}
+                                color={"brand.bg.green.light"}
+                            />
+
+                            <Text
+                                // color={"text.secondary"}
+                                fontSize={{ base: "lg", md: "xl" }}
+                            >
+                                {socialMedia.phone}
+                            </Text>
+                        </Stack>
                         <Stack
                             direction={"row"}
                             spacing={6}
@@ -80,7 +85,7 @@ const ContactPage: NextPage = (props) => {
                                 label={"Twitter"}
                                 href={socialMedia.twitter}
                             >
-                                <FaTwitter />
+                                <FaXTwitter />
                             </SocialButton>
                             <SocialButton
                                 label={"Linkedin"}

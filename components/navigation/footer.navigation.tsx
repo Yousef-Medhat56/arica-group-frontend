@@ -7,6 +7,7 @@ import {
     Text,
     VisuallyHidden,
     Select,
+    Icon,
 } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
 import NextLink from "next/link";
@@ -14,16 +15,15 @@ import {
     FaFacebook,
     FaInstagram,
     FaLinkedin,
-    FaTwitter,
     FaWhatsapp,
 } from "react-icons/fa";
+import { AiOutlinePhone } from "react-icons/ai";
+import { FaXTwitter } from "react-icons/fa6";
+
 import ImageComp from "../misc/image.misc";
 
 //images
 import MainContainer from "../containers/main.container";
-import { useRouter } from "next/router";
-import { get } from "../../adapters/index";
-import { GetStaticProps } from "next";
 
 export const SocialButton = ({
     children,
@@ -72,7 +72,6 @@ export default function Footer({
     brand: any;
     socialMedia: any;
 }) {
-
     return (
         <>
             {socialMedia ? (
@@ -113,6 +112,21 @@ export default function Footer({
                                 >
                                     {brand.attributes.gray_text}
                                 </Text>
+                                <Stack direction={"row"} alignItems={"center"}>
+                                    <Icon
+                                        as={AiOutlinePhone}
+                                        height={6}
+                                        width={6}
+                                        color={"brand.bg.green.light"}
+                                    />
+
+                                    <Text
+                                        // color={"text.secondary"}
+                                        fontSize={{ base: "md", md: "18px" }}
+                                    >
+                                        {socialMedia.phone}
+                                    </Text>
+                                </Stack>
                                 <Stack direction={"row"} spacing={6}>
                                     <SocialButton
                                         label={"Whatsapp"}
@@ -136,7 +150,7 @@ export default function Footer({
                                         label={"Twitter"}
                                         href={socialMedia.twitter}
                                     >
-                                        <FaTwitter />
+                                        <FaXTwitter />
                                     </SocialButton>
                                     <SocialButton
                                         label={"Linkedin"}
@@ -145,8 +159,12 @@ export default function Footer({
                                         <FaLinkedin />
                                     </SocialButton>
                                 </Stack>
+                               
                             </Stack>
-                            <Stack align={"flex-start"}>
+                            <Stack
+                                align={"flex-start"}
+                                justify={"space-around"}
+                            >
                                 <ListHeader>
                                     {content.servicesSection.heading}
                                 </ListHeader>
@@ -174,6 +192,7 @@ export default function Footer({
                             <Stack
                                 align={"flex-start"}
                                 marginTop={{ base: "-7", sm: "42px" }}
+                                justify={"space-around"}
                             >
                                 {/* <br/> */}
                                 <NextLink href="/irrigation-networks" passHref>
@@ -253,5 +272,3 @@ export default function Footer({
         </>
     );
 }
-
-
