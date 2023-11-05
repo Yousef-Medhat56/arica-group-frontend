@@ -29,6 +29,7 @@ function ServicesSectionContent({ content,services }: { content: any,services:an
                             serviceName={service.label}
                             serviceDesc={service.description as string}
                             iconName={service.iconName as string}
+                            href={service.href}
                         />
                     </GridItem>
                 ))}
