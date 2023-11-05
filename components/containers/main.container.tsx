@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Container } from "@chakra-ui/react";
+import { Container, background } from "@chakra-ui/react";
 
 interface MainContainerProps {
     children: ReactNode;
@@ -10,7 +10,7 @@ export default function MainContainer({
     ...rest
 }: MainContainerProps) {
     return (
-        <Container maxW="1600px" px={{ base: 4, md: 8, xl: "120px" }} {...rest}>
+        <Container  maxW="1600px" px={{ base: 4, md: 8, xl: "120px" } } {...rest}>
             {children}
         </Container>
     );

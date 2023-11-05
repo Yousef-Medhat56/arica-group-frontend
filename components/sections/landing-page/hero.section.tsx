@@ -11,6 +11,9 @@ import ViewOnScroll from "../../animation/view-on-scroll.animation";
 import GradientButton from "../../buttons/gradient.button";
 
 export default function Hero({ content,brand }: { content: any,brand:any }) {
+    const heroHasImg = brand.attributes.hero_image.data
+        ? true
+        : false;
     return (
         <ViewOnScroll>
             <Stack
@@ -19,6 +22,7 @@ export default function Hero({ content,brand }: { content: any,brand:any }) {
                 spacing={{ base: 6, md: 7, lg: 9 }}
                 pt={{ base: 32, lg: 44 }}
                 pb={{ base: 28, lg: 36 }}
+                pos={"relative"}
             >
                 <Heading
                     fontWeight={600}
@@ -43,7 +47,7 @@ export default function Hero({ content,brand }: { content: any,brand:any }) {
                     {brand.attributes.black_bold_text}
                 </Heading>
                 <Text
-                    color={"text.secondary"}
+                    color={heroHasImg?"#595959":"text.secondary"}
                     mx="auto !important"
                     fontSize={{ base: "md", md: "18px", xl: "22px" }}
                 >

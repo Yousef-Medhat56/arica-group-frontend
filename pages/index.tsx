@@ -47,6 +47,10 @@ const Home: NextPage = (props) => {
     } = props;
 
     const projectsNum = projects.length;
+    
+    const heroHasImg = brand.attributes.hero_image.data
+        ? true
+        : false;
     return (
         <div>
             <Head>
@@ -59,10 +63,7 @@ const Home: NextPage = (props) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                <meta
-                    property="og:title"
-                    content={content.landingTitle}
-                />
+                <meta property="og:title" content={content.landingTitle} />
                 <meta
                     property="og:description"
                     content={`${brand.attributes.highlighted_text}. ${brand.attributes.black_bold_text}`}
@@ -79,7 +80,14 @@ const Home: NextPage = (props) => {
                 logo={brand.attributes.logo.data.attributes.url}
                 projectsNum={projectsNum}
             />
-            <MainContainer>
+            <MainContainer
+                backgroundImage={
+                    heroHasImg
+                        ? `url(${brand.attributes.hero_image.data.attributes.url})`
+                        : ""
+                }
+                className={heroHasImg && "hero-image"}
+            >
                 <Hero content={content} brand={brand} />
             </MainContainer>
             {/* Featured clients  */}
