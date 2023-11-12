@@ -106,7 +106,7 @@ const ServiceHit = ({
             serviceObj.serviceMsg = "تعرف على خدمات شبكات الري التي نقدمها";
             break;
         case "electricity":
-            serviceObj.servicePath = "/electricity-networkss";
+            serviceObj.servicePath = "/electricity-networks";
             serviceObj.serviceMsg = "تعرف على خدمات شبكات الكهرباء التي نقدمها";
             break;
     }
