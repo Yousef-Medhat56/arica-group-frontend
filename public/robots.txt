@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: 
-Disallow: /
+Allow: /
 Sitemap: https://arica-group.com/sitemap.xml
